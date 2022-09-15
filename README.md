@@ -28,7 +28,7 @@ php artisan key:generate
 
 ## Contributors
 
-[Joshua Salinas](https://github.com/joshuasalinas)
-[Joshua Sintos](https://github.com/JSintos)
-[Yumi Terayama](https://github.com/yumiterayama)
+[Joshua Salinas](https://github.com/joshuasalinas)  
+[Joshua Sintos](https://github.com/JSintos)  
+[Yumi Terayama](https://github.com/yumiterayama)  
 [Anekiel Trinidad](https://github.com/anekieltrinidad)
