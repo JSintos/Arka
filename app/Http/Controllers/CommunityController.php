@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Community;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+
 
 class CommunityController extends Controller
 {
@@ -24,7 +27,9 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        return view('proxy-community');
+        $communities = Community::all();
+
+        return view('proxy-community')->with(array('communities' => $communities));
     }
 
     /**
@@ -35,25 +40,22 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        // $user = Auth::user();
+        // dd($request->all());
+
+        $user = auth()->user();
        
-        
-        // $collect = [];
-        // $community = $request->all();
-        // $collect[] = array($community);
+        $result = json_encode($request->all()['community']);
 
-        // $result = json_encode($collect);
+        $user->communityList = $result;
 
-        // $user->communityList = $request->get($result);
+        $user->save();
 
-        // $user->save();
-
-        // return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
 
          // $id = Auth::id();
         // $user = User::findOrFail($id);
 
-        error_log("here");
+
     }
 
     /**
@@ -100,4 +102,6 @@ class CommunityController extends Controller
     {
         //
     }
+
+
 }
