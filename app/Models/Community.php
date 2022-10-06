@@ -9,6 +9,9 @@ class Community extends Model
 {
     use HasFactory;
 
-   protected $primaryKey = 'communityId';
+    protected $table = 'users';
+
+    protected $fillable = [
+        'communityList',];
 
 }

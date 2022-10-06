@@ -24,7 +24,7 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        return view('proxy-community');
     }
 
     /**
@@ -35,7 +35,25 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $user = Auth::user();
+       
+        
+        // $collect = [];
+        // $community = $request->all();
+        // $collect[] = array($community);
+
+        // $result = json_encode($collect);
+
+        // $user->communityList = $request->get($result);
+
+        // $user->save();
+
+        // return redirect(RouteServiceProvider::HOME);
+
+         // $id = Auth::id();
+        // $user = User::findOrFail($id);
+
+        error_log("here");
     }
 
     /**

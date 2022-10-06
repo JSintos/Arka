@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommunityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('proxy-community', [CommunityController::class, 'create'])
+                ->name('proxy-community');
+
+Route::post('proxy-community', [CommunityController::class, 'store']);
+
 
 require __DIR__.'/auth.php';

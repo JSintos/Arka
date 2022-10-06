@@ -32,7 +32,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user = auth()->user();
+        // dd($user);
+
+        if($user->communityList == null)
+        {
+            return redirect('/proxy-community');
+        }
+        else
+        {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**
