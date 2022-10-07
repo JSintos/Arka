@@ -35,36 +35,27 @@
   @csrf
   <p>
 
-  <select id="firstDropbox" name="community[0]">
+  <select id="firstDropbox" name="community[0]" class="selectCommunity">
     <div class="dropdown-content">
-      <!-- <option value = "Architecture">Architecture</option>
-      <option value = "Biology">Biology</option>
-      <option value = "Business">Business</option>
-      <option value = "Computer Science">Computer Science</option> -->
+      <option value="">Choose 1st interest</option>
       @foreach($communities as $community)
         <option value = "{{ $community->communityName }}">{{ $community->communityName }}</option>
       @endforeach
     </div>
   </select>
   <p>
-  <select id="secondDropbox" name="community[1]">
+  <select id="secondDropbox" name="community[1]" class="selectCommunity">
     <div class="dropdown-content">
-      <!-- <option value = "Architecture">Architecture</option>
-      <option value = "Biology" >Biology</option>
-      <option value = "Business">Business</option>
-      <option value = "Computer Science"> Computer Science</option> -->
+      <option value="">Choose 2nd interest</option>
       @foreach($communities as $community)
         <option value = "{{ $community->communityName }}">{{ $community->communityName }}</option>
       @endforeach
     </div>
   </select>
   <p>
-  <select id="thirdDropbox" name="community[2]">
+  <select id="thirdDropbox" name="community[2]" class="selectCommunity">
     <div class="dropdown-content">
-      <!-- <option value = "Architecture">Architecture</option>
-      <option value = "Biology">Biology</option>
-      <option value = "Business">Business</option>
-      <option value = "Computer Science">Computer Science</option> -->
+      <option value="">Choose 3nd interest</option>
       @foreach($communities as $community)
         <option value = "{{ $community->communityName }}">{{ $community->communityName }}</option>
       @endforeach
@@ -74,10 +65,13 @@
     <x-button class="ml-4">
     {{ __('Submit') }}
     </x-button>
+    
 </form>
 </div>
 </div>
+
+
+
 </x-auth-card>
 </x-guest-layout>
-<!--scripts -->
-<script src="js/community.js"></script>
+

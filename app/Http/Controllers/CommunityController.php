@@ -44,9 +44,15 @@ class CommunityController extends Controller
 
         $user = auth()->user();
        
-        $result = json_encode($request->all()['community']);
 
-        $user->communityList = $result;
+        // Only keep unique values, by using array_unique with SORT_REGULAR as flag.
+        // We're using array_values here, to only retrieve the values and not the keys.
+        // This way json_encode will give us a nicely formatted JSON string later on.
+        $array = array_values( array_unique( $request->all()['community'], SORT_REGULAR ) );
+
+        // Make a JSON string from the array.
+        $final = json_encode( $array );
+        $user->communityList = $final;
 
         $user->save();
 
