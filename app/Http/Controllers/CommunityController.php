@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Community;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+
 
 class CommunityController extends Controller
 {
@@ -24,7 +27,9 @@ class CommunityController extends Controller
      */
     public function create()
     {
-        //
+        $communities = Community::all();
+
+        return view('proxy-community')->with(array('communities' => $communities));
     }
 
     /**
@@ -35,7 +40,28 @@ class CommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $user = auth()->user();
+       
+
+        // Only keep unique values, by using array_unique with SORT_REGULAR as flag.
+        // We're using array_values here, to only retrieve the values and not the keys.
+        // This way json_encode will give us a nicely formatted JSON string later on.
+        $array = array_values( array_unique( $request->all()['community'], SORT_REGULAR ) );
+
+        // Make a JSON string from the array.
+        $final = json_encode( $array );
+        $user->communityList = $final;
+
+        $user->save();
+
+        return redirect(RouteServiceProvider::HOME);
+
+         // $id = Auth::id();
+        // $user = User::findOrFail($id);
+
+
     }
 
     /**
@@ -82,4 +108,6 @@ class CommunityController extends Controller
     {
         //
     }
+
+
 }

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +22,15 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('proxy-community', [CommunityController::class, 'create'])
+                ->name('proxy-community');
+
+Route::post('proxy-community', [CommunityController::class, 'store']);
+
+Route::get('proxy-update-user', [UserController:: class, 'create'])
+                ->name('proxy-update-user');
+Route::post('proxy-update-user', [UserController:: class, 'profileUpdate']);
+
 
 require __DIR__.'/auth.php';
