@@ -15,6 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('proxy-update-user')">
+                        {{ __('Update Profile') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('monthly-feedback')">
+                        {{ __('Monthly Feedback') }}
+                    </x-nav-link>
                 </div>
             </div>
 
