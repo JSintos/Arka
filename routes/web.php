@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/contact-sales', function () {
+    return view('contact-sales');
+});
+
+Route::get('/report-form', function () {
+    return view('report-form');
+});
+
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::get('proxy-community', [CommunityController::class, 'create'])
@@ -29,6 +42,14 @@ Route::post('proxy-community', [CommunityController::class, 'store']);
 Route::get('proxy-update-user', [UserController:: class, 'create'])
                 ->name('proxy-update-user');
 Route::post('proxy-update-user', [UserController:: class, 'profileUpdate']);
+
+Route::get('change-password', [UserController::class, 'showChangePassword'])
+                ->name('change-password');
+
+Route::post('change-password', [UserController::class, 'changePassword']);
+
+Route:: get('monthly-feedback', [FeedbackController:: class, 'create'])
+                ->name('monthly-feedback');
 
 
 require __DIR__.'/auth.php';
