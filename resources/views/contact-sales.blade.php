@@ -1,9 +1,10 @@
-<!-- header -->
-<?php 
-  $title = 'Contact Sales Form';
-  require_once 'includes/header.php'; ?> 
+@extends('layouts.header')
+@section('content')
+@section('title','Contact Sales')
 </div>
 </nav>
+
+<!-- Contact Sales Form -->
 <div class="form-container">
   <form class="contact-form">
   <div>
@@ -41,8 +42,6 @@
       </div>
     </form>
 </div>
-
 </div>
 
-<!-- footer -->
-<?php require_once 'includes/footer.php'; ?>
+@endsection

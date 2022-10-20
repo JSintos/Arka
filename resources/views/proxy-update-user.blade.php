@@ -1,22 +1,15 @@
+@extends('layouts.header')
+@section('content')
+@section('title','Account Settings')
+</div>
+</nav>
 
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/dashboard">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-
-
-<div class="container">
+<div class="form-container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="text-align: center;" >{{Auth::user()->username}}'s Profile</div>
-                    <div class="container">
+            <div class="user-card">
+                <div class="card-header" style="text-align: center"><i class='fa fa-user'></i>{{Auth::user()->username}}'s Profile</div>
                         @if ($errors->any())
-                            <div class="mb-4">
+                            <div class="mb-3">
                             <ul>
                                 @foreach($errors->all() as $error)
                                 <li>
@@ -35,27 +28,24 @@
                     <form action="{{route('proxy-update-user')}}" method="POST">
                     @csrf
                         <div class="mt-4">
-                           <label for="name"><strong>Name:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="name" name="name" value="{{Auth::user()->username}}" required>
+                           <label for="name" class="form-label"><strong>Name:</strong></label>
+                           <input type="text" class="form-control" id ="name" name="name" value="{{Auth::user()->username}}" required>
                        </div>
                        <div class="mt-4">
-                           <label for="email"><strong>Email:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="email" value="{{Auth::user()->email}}" name="email" required>
+                           <label for="email" class="form-label"><strong>Email:</strong></label>
+                           <input type="text" class="form-control" id ="email" value="{{Auth::user()->email}}" name="email" required>
                        </div>
                     
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('change-password') }}">
+                        <div class="button">
+                            <a class="change-pass" href="{{ route('change-password') }}">
                                 {{ __('Change password') }}
                             </a>
-                            <x-button class="ml-4">
-                                {{ __('Update Profile') }}
-                            </x-button>
+                            <button class="update-btn" type="submit">Update Profile</button> 
                     </form>
                 
                 </div>
             </div>
-        </div>
+        
 </div>
 
-</x-auth-card>
-</x-guest-layout>
+@endsection
