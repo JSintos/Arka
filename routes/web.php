@@ -19,12 +19,15 @@ use App\Http\Controllers\FeedbackController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/index', function () {
     return view('index');
 });
+
 Route::get('/contact-sales', function () {
     return view('contact-sales');
 });
+
 Route::get('/report-form', function () {
     return view('report-form');
 });
@@ -42,6 +45,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::get('proxy-community', [CommunityController::class, 'create'])
                 ->name('proxy-community');
