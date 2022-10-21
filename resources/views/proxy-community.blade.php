@@ -1,8 +1,7 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Select Communities')
-</div>
-</nav>
+@section('title','ARKA-Select Communities')
 
 <!-- Select community options -->
 <div class="form-container">

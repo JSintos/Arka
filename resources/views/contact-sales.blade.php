@@ -1,47 +1,78 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Contact Sales')
-</div>
+@section('title','ARKA-Contact Sales')
+    <div class="collapse  navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ route('register') }}">Sign Up</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
+
 <!-- Contact Sales Form -->
-<div class="form-container">
-  <form class="contact-form">
-  <div>
-    <h3>Contact our Sales Team</h3>
-    <p>Let's discover our potential together.</p>
-    </div>
-  <div class="input-group mb-3">
-        <input type="text" aria-label="First name" placeholder= "First name" class="form-control" value="">
-        <input type="text" aria-label="Last name" placeholder= "Last name" class="form-control" value="">
-      </div>
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Work email" aria-label="workEmail" value="">
-      </div>
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Company Name" aria-label="company" value="">
-      </div>
-    <div class="mb-3">
-        <select class="form-select" required aria-label="select example" >
-          <option selected>Company Size</option>
-            <option value="1">50-100 members</option>
-            <option value="2">100-1k members</option>
-            <option value="2">1k and above</option> 
-        </select>
-        <div class="invalid-feedback">Please fill in the required details</div>
-      </div>
-    <div class="mb-3">
-        <label for="reportDescription" class="form-label"></label>
-        <textarea class="form-control" id="reportDescription" placeholder="Anything else?" required></textarea>
-        <div class="invalid-feedback">
-        Required example textarea.
+<div class="container justify-content-center align-items-center mt-5 p-5">
+    <h2>Contact our Sales Team</h2>
+    <p>Let's discuss more of our offers with you.</p>
+    <form class="row g-3 d-flex" >
+        <div class="col-md-6">
+            <label  type="text" class="form-label">First Name</label>
+            <input class="form-control">
         </div>
-      </div>
-      <div class="col-12">
-        <button class="report-btn" type="submit">Submit form</button>
-      </div>
+        <div class="col-md-6">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-control" >
+        </div>
+        <div class="col-12">
+            <label class="form-label">Work E-mail</label>
+            <input type="email" class="form-control" >
+        </div>
+        <div class="col-12">
+            <label class="form-label">Company Name</label>
+            <input type="text" class="form-control"  >
+        </div>
+        <div class="col-12">
+            <label class="form-label">Company Size</label>
+            <select class=" form-select" aria-label="Default select example">
+              <option selected>Choose..</option>
+              <option value="1">1-4 members</option>
+              <option value="2">5-19 members</option>
+              <option value="3">20-99 members</option>
+              <option value="3">100 and more members</option>
+            </select>
+        </div>
+        <div class="col-12">
+        <label class="form-label">Country</label>
+            <select class=" form-select" aria-label="Default select example">
+                <option selected>Choose..</option>
+                <option value="1">Philippines</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">City</label>
+            <select  class="form-select">
+            <option selected>Choose...</option>
+            <option value="1">Manila</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Zip</label>
+            <input type="text" class="form-control">
+        </div>
+      
+       <div class="col-12">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" placeholder="Anything else?"></textarea>
+       </div>
+        <div class="col-12 button">
+            <button type="submit" class="secondary-btn">Submit</button>
+        </div>
     </form>
-</div>
 </div>
 
 @endsection

@@ -92,8 +92,9 @@ input, button, textarea {
     font-size: 20px;
 }
 .main-btn {
-    margin-top: 15px;
-    width: 120px;
+    margin-top: auto;
+    width: fit-content;
+    min-width: 100px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -112,9 +113,10 @@ input, button, textarea {
 }
 .secondary-btn {
     margin-top: auto;
-    width: 120px;
+    width: fit-content;
+    min-width: 100px;
     height: 40px;
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     background-color: #90CCF4;
@@ -310,6 +312,16 @@ input, button, textarea {
     margin: auto;
     border-radius: 15px;
     position: relative;
+}
+.second-text{
+    font-size: 14px;
+    text-align: justify;
+    font-family: "Raleway", sans-serif;
+    color: #000;
+}
+.panel-body {
+    justify-content: center;
+    align-items: center;
 }
 
 /* REGISTER */

@@ -28,9 +28,16 @@ Route::get('/contact-sales', function () {
 Route::get('/report-form', function () {
     return view('report-form');
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
+Route::get('/subscription', function () {
+    return view('subscription');
+});
+Route::get('/payment-portal', function () {
+    return view('payment-portal');
+});
+Route::get('/terms-and-condition', function () {
+    return view('terms-and-condition');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

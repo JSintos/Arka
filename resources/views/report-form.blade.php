@@ -1,4 +1,5 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
 @section('title','Report')
 </div>

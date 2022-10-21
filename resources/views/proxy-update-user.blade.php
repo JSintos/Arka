@@ -1,9 +1,7 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Account Settings')
-</div>
-</nav>
-
+@section('title','ARKA-Account Settings')
 <div class="form-container">
     <div class="row justify-content-center">
             <div class="user-card">

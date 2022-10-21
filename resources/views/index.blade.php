@@ -1,4 +1,5 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
 @section('title','ARKA')
 <!-- navigation bar -->
@@ -17,10 +18,10 @@
           <a class="nav-link" href="#offers">Offers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="select-community.php" >Login</a>
+          <a class="nav-link" href="{{ route('login') }}" >Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="#">Signup</a>
+          <a class="nav-link active" href="{{ route('register') }}">Signup</a>
         </li>
       </ul>
       </ul>
@@ -32,7 +33,7 @@
         <div class="main-heading">
           <h1>Boost Academic Performance with Collaboration</h1>
           <p>Make new friends and be part of building a positive community!</p>
-          <a class="main-btn" href="#">Join now</a>
+          <a class="main-btn" href="{{ route('register') }}">Join now</a>
         </div>
     </section>
 <!-- About Us section -->
@@ -51,42 +52,43 @@
 <!-- Offers section -->
     <section class="offers" id="offers">
       <h2>Simple plans made for you</h2>
-      <div class="offer-container">
-        <div class="offer-box">
-          <div class="o-img">
-            <img src="images/basic.png"/>
-          </div>
-          <div class="o-text">
-            <h4><strong>Basic</strong> </h4>
-            <h6>Free</h6>
-            <p>Have a max of 10 Arka communities and a max of 8 Arka users in a room</p>
-            <a class="offer-btn" href="#">Start for free</a>
-          </div>
-        </div>
+          <div class="offer-container">
+              <!-- Basic Subscription -->
+              <div class="offer-box">
+                <div class="o-img">
+                  <img src="images/basic.png"/>
+                </div>
+                <div class="o-text">
+                  <h4><strong>Basic</strong> </h4>
+                  <h6>Free</h6>
+                  <p>Have a max of 10 Arka communities and a max of 8 Arka users in a room</p>
+                  <a class="offer-btn" href="{{ route('register') }}">Start for free</a>
+                </div>
+            </div>
 
-        <div class="offer-box">
-          <div class="o-img">
-            <img src="images/individual.png"/>
-          </div>
-          <div class="o-text">
-            <h4><strong>Individual</strong> </h4>
-            <h6>For as low as ₱135</h6>
-            <p>Have unlimited communities and a max of 15 Arka users per chatroom</p>
-            <a class="offer-btn" href="#">Subscribe now</a>
-          </div>
-        </div>
+            <div class="offer-box">
+              <div class="o-img">
+                <img src="images/individual.png"/>
+              </div>
+              <div class="o-text">
+                <h4><strong>Individual</strong> </h4>
+                <h6>For as low as ₱135</h6>
+                <p>Have a max of 25 Arka communities and a max of 15 Arka users in a room</p>
+                <a class="offer-btn" href="{{ route('login') }}">Subscribe now</a>
+              </div>
+            </div>
 
-        <div class="offer-box">
-          <div class="o-img">
-            <img src="images/organization.png"/>
-          </div>
-          <div class="o-text">
-            <h4><strong>Organization</strong> </h4>
-            <h6>For ₱1,464 annually</h6>
-            <p>Have unlimited communities and a max of 15 Arka users per chatroom</p>
-            <a class="offer-btn" href="contact-sales.php">Contact sales</a>
-          </div>
+            <div class="offer-box">
+              <div class="o-img">
+                <img src="images/organization.png"/>
+              </div>
+              <div class="o-text">
+                <h4><strong>Organization</strong> </h4>
+                <h6>For ₱1,464 annually</h6>
+                <p>Have a max of 25 Arka communities and a max of 15 Arka users in a room</p>
+                <a class="offer-btn" href="{{ route('register') }}">Contact sales</a>
+              </div>
+            </div>
         </div>
-      </div>
     </section>
     @endsection
