@@ -19,10 +19,10 @@ class CreateFeedbacksTable extends Migration
             $table->foreign('userId')->references('userId')->on('users');
             $table->dateTime('dateFeedbackAnswered');
             $table->tinyInteger('type');
-            $table->integer('firstQuestionRating');
-            $table->integer('secondQuestionRating');
-            $table->integer('thirdQuestionRating');
-            $table->integer('fourthQuestionRating');
+            $table->integer('firstQuestionRating')->nullable();
+            $table->integer('secondQuestionRating')->nullable();
+            $table->integer('thirdQuestionRating')->nullable();
+            $table->integer('fourthQuestionRating')->nullable();
             $table->timestamps();
         });
     }

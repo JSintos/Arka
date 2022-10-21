@@ -37,8 +37,13 @@ Route::get('change-password', [UserController::class, 'showChangePassword'])
 
 Route::post('change-password', [UserController::class, 'changePassword']);
 
-Route:: get('monthly-feedback', [FeedbackController:: class, 'create'])
+Route:: get('monthly-feedback', [FeedbackController:: class, 'showMonthlyFeedback'])
                 ->name('monthly-feedback');
 
+Route:: post('monthly-feedback', [FeedbackController:: class, 'monthlyFeedback']);
 
+Route:: get('practice', [FeedbackController:: class, 'create'])
+                ->name('practice');                
+
+Route:: post('practice', [FeedbackController:: class, 'store']);
 require __DIR__.'/auth.php';

@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('monthly-feedback')">
                         {{ __('Monthly Feedback') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('practice')">
+                        {{ __('Practice') }}
+                    </x-nav-link>
                 </div>
             </div>
 
