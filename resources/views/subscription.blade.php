@@ -33,7 +33,8 @@
                         </div>
 
                         <div class="col-12 button mt-5">
-                            <button type="submit" class="secondary-btn" href="{{ route('login') }}">Submit</button>
+                            <a class="nav-link secondary-btn" href="{{ route('payment-portal') }}" >Proceed</a>
+            
                         </div>
                 </div>
                 

@@ -22,24 +22,24 @@ Route::get('/', function () {
 
 Route::get('/index', function () {
     return view('index');
-});
+})->name('index');
 
 Route::get('/contact-sales', function () {
     return view('contact-sales');
-});
+})->name('contact-sales');
 
 Route::get('/report-form', function () {
     return view('report-form');
 });
 Route::get('/subscription', function () {
     return view('subscription');
-});
+})->name('subscription');
 Route::get('/payment-portal', function () {
     return view('payment-portal');
-});
+})->name('payment-portal');
 Route::get('/terms-and-condition', function () {
     return view('terms-and-condition');
-});
+})->name('terms-and-condition');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

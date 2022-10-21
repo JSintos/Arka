@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-12 button mt-3">
-                    <button type="submit" class="secondary-btn" href="payment-portal.blade.php">Finish</button>
+                    <a class="nav-link secondary-btn" href="{{ route('index') }}" >Finish</a>
                 </div>
                 
                 

@@ -55,7 +55,7 @@
                                     <div class="form-check form-check-text">
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">
-                                        I agree with the <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                                        I agree with the <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('terms-and-condition') }}">
                                         {{ __('Terms & Conditions of Arka.') }}
                                     </a>
                                     </label>
