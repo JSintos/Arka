@@ -11,21 +11,18 @@ class HomeController extends Controller
     public function home()
     {
         $user = auth()->user();
+        // Gets the list of communities the user has
         $communityList = \json_decode($user->communityList);
 
+        // Gets the list of existing communities
         $communities = DB::table('communities')->get();
-
-        $existingCommunities = array();
-        foreach($communities as $community){
-            array_push($existingCommunities, $community->communityName);
-        }
-
-        unset($community);
 
         $resultingArray = array();
         foreach($communityList as $community){
-            if(\in_array($community, $existingCommunities)){
-                array_push($resultingArray, $community);
+            foreach($communities as $c){
+                if(\strcmp($community, $c->communityName) == 0){
+                    array_push($resultingArray, $c);
+                }
             }
         }
 
