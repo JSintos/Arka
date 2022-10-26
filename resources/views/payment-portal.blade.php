@@ -24,15 +24,11 @@
                     </div>
                 </div>
                 <div class="col-12 button mt-3">
-                    <a class="nav-link secondary-btn" href="{{ route('index') }}" >Finish</a>
+                    <a class="nav-link secondary-btn">Finish</a>
                 </div>
-                
-                
             </div>
         </div>
     </div>
-
-
 </div>
 
 

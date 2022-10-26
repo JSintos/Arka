@@ -20,13 +20,9 @@
     <h2>Contact our Sales Team</h2>
     <p>Let's discuss more of our offers with you.</p>
     <form class="row g-3 d-flex" >
-        <div class="col-md-6">
-            <label  type="text" class="form-label">First Name</label>
-            <input class="form-control">
-        </div>
-        <div class="col-md-6">
-            <label class="form-label">Last Name</label>
-            <input type="text" class="form-control" >
+        <div class="col-12">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" >
         </div>
         <div class="col-12">
             <label class="form-label">Work E-mail</label>
@@ -53,18 +49,6 @@
                 <option value="1">Philippines</option>
             </select>
         </div>
-        <div class="col-md-4">
-            <label class="form-label">City</label>
-            <select  class="form-select">
-            <option selected>Choose...</option>
-            <option value="1">Manila</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label class="form-label">Zip</label>
-            <input type="text" class="form-control">
-        </div>
-      
        <div class="col-12">
             <label class="form-label">Message</label>
             <textarea class="form-control" placeholder="Anything else?"></textarea>

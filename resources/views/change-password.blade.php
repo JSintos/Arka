@@ -1,10 +1,11 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Password')
+@section('title','ARKA-Account Settings')
 </div>
 </nav>
 <section class="flex-column min-vh-100 justify-content-center align-items-center mt-5 p-5">
-<div class="container ">
+<div class="container">
     <!-- <div class="row"> -->
         <div class="col-md-10 offset-2 mx-auto rounded shadow bg-white">
             <div class="panel panel-box ml-5">
@@ -66,7 +67,7 @@
                         </div>
 
                         <div class="button">
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('proxy-update-user') }}">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('update-user') }}">
                                 {{ __('Go Back') }}
                             </a>
                             <x-button class="secondary-btn ml-4 second-text">
