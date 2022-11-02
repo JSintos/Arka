@@ -2,8 +2,6 @@
 @include('layouts.navbar')
 @section('content')
 @section('title','ARKA-Account Settings')
-</div>
-</nav>
 <section class="flex-column min-vh-100 justify-content-center align-items-center mt-5 p-5">
 <div class="container">
     <!-- <div class="row"> -->

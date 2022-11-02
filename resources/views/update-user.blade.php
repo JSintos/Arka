@@ -2,8 +2,7 @@
 @include('layouts.navbar')
 @section('content')
 @section('title','ARKA-Account Settings')
-</div>
-</nav>
+
 
 <div class="form-container">
     <div class="row justify-content-center">

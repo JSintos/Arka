@@ -2,8 +2,7 @@
 @include('layouts.navbar')
 @section('content')
 @section('title','ARKA-Account Settings')
-</div>
-</nav>
+
 <div class="form-container mb-5">
     <div class="row justify-content-center">
         <div class="card" style="width: 50%;">

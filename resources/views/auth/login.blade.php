@@ -1,8 +1,7 @@
 @extends('layouts.header')
 @section('content')
 @section('title','ARKA-Login')
-</div>
-</nav>
+
 <section class="flex-column min-vh-80 justify-content-center align-items-center mt-5 p-5">
     <div class="container">
         <div class="row"> 
@@ -47,6 +46,10 @@
                                                     {{ __('Forgot your password?') }}
                                                 </a>
                                             @endif
+                                            
+                                                <a class="underline text-sm ml-4" href="{{ route('register') }}">
+                                                    {{ __('Sign Up here!') }}
+                                                </a>
                                             <button class="secondary-btn ml-4 text-sm" type="submit">Log in</button>
                                         </div>
                                     </div>
@@ -56,10 +59,7 @@
                         <div> 
                             <img src="../images/login.svg" alt="register-image" class="img-fluid ">
                         </div>
-                        <div class="button">
-                        <a class="text-sm hover:text-gray-900 mt-4" href="{{ route('register') }}">
-                                                    {{ __('Sign Up here!') }}
-                                                </a></div>
+                        
                     </div>
                 </div>
             </div>

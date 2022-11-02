@@ -5,4 +5,6 @@
     <a class="navbar-brand" href="#">
       <img src="images/logoarka.png" alt="logo">
     </a> 
+    </div>
+</nav>
  

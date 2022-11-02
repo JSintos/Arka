@@ -2,8 +2,7 @@
 @include('layouts.navbar')
 @section('content')
 @section('title','ARKA-Terms & Conditions')
-</div>
-</nav>
+
 <div class="container">
     <h1>Terms and Conditions</h1>
     <p>I. Introduction and Acceptance of the Agreement </p>

@@ -2,8 +2,7 @@
 @include('layouts.navbar')
 @section('content')
 @section('title','Report')
-</div>
-</nav>
+
 <!-- Report Form -->
 <div class="form-container">
   <form class="form-box">
