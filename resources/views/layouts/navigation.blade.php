@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('practice')">
                         {{ __('Practice') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('subscription')">
+                        {{ __('Subscribe') }}
+                    </x-nav-link>
                 </div>
             </div>
 
