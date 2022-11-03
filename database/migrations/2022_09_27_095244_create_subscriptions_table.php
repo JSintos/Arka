@@ -17,8 +17,11 @@ class CreateSubscriptionsTable extends Migration
             $table->id('subscriptionId');
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('userId')->on('users');
-            $table->dateTime('subscriptionDate');
-            $table->dateTime('expirationDate');
+            $table->string('referenceNumber');
+            $table->string('phoneNumber');
+            $table->dateTime('subscriptionDate')->nullable()->default(null);
+            $table->dateTime('expirationDate')->nullable()->default(null);
+            $table->boolean('isConfirmed')->default(false);
             $table->timestamps();
         });
     }
