@@ -1,13 +1,10 @@
-<!-- header -->
-<?php 
-  $title = 'Report Form';
-  require_once 'includes/header.php'; ?> 
-</div>
-</nav>
+@extends('layouts.header')
+@include('layouts.navbar')
+@section('content')
+@section('title','Report')
 
-
-  <!-- Report Form -->
-  <div class="form-container">
+<!-- Report Form -->
+<div class="form-container">
   <form class="form-box">
     <div>
     <h3>Please select a problem</h3>
@@ -37,6 +34,4 @@
   </div>
 </form>
 </div>
-  
-  <!-- footer -->
-<?php require_once 'includes/footer.php'; ?>
+@endsection

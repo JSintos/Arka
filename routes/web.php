@@ -18,19 +18,44 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/contact-sales', function () {
+    return view('contact-sales');
+})->name('contact-sales');
+
+Route::get('/report-form', function () {
+    return view('report-form');
+});
+
+Route::get('/subscription', function () {
+    return view('subscription');
+})->name('subscription');
+
+Route::get('/payment-portal', function () {
+    return view('payment-portal');
+})->name('payment-portal');
+
+Route::get('/terms-and-condition', function () {
+    return view('terms-and-condition');
+})->name('terms-and-condition');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
-Route::get('proxy-community', [CommunityController::class, 'create'])
-                ->name('proxy-community');
+Route::get('community', [CommunityController::class, 'create'])
+                ->name('community');
 
-Route::post('proxy-community', [CommunityController::class, 'store']);
+Route::post('community', [CommunityController::class, 'store']);
 
-Route::get('proxy-update-user', [UserController:: class, 'create'])
-                ->name('proxy-update-user');
-Route::post('proxy-update-user', [UserController:: class, 'profileUpdate']);
+Route::get('update-user', [UserController:: class, 'create'])
+                ->name('update-user');
+
+Route::post('update-user', [UserController:: class, 'profileUpdate']);
 
 Route::get('change-password', [UserController::class, 'showChangePassword'])
                 ->name('change-password');
@@ -46,4 +71,5 @@ Route:: get('practice', [FeedbackController:: class, 'create'])
                 ->name('practice');                
 
 Route:: post('practice', [FeedbackController:: class, 'store']);
+
 require __DIR__.'/auth.php';

@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('proxy-update-user');
+        return view('update-user');
     }
 
     /**
