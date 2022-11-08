@@ -43,4 +43,9 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey = 'userId';
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
