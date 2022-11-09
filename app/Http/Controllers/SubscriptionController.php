@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
@@ -14,7 +15,7 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +25,7 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('subscription');
     }
 
     /**
@@ -83,5 +84,46 @@ class SubscriptionController extends Controller
     public function destroy(Subscription $subscription)
     {
         //
+    }
+
+    public function getPayment()
+    {
+        $id = Auth::user()->userId;
+        
+        if (Subscription::where('userId', '=', $id)->exists()) {
+            return redirect('subscription')->with("error", "You already have a premium subscription");    
+        }
+        else{
+            return view('gcash-payment');
+        }
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postPayment(Request $request)
+    {
+        // dd($request->all());
+        
+        $request->validate([
+            'referenceNumber' => ['required', 'string', 'max:255'],
+            'phoneNumber' => ['required', 'string', 'max:255']
+        ]);
+
+        $id = Auth::user()->userId;
+
+        $subscription = Subscription::create([
+            'userId' => $id,
+            'referenceNumber' => $request->referenceNumber,
+            'phoneNumber' => $request->phoneNumber,
+        ]);
+
+        return redirect()->back()->with("success","Availed for premium subscription!");
+
+        
     }
 }

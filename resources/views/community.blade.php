@@ -1,12 +1,11 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Select Communities')
-</div>
-</nav>
+@section('title','ARKA-Select Communities')
 
 <!-- Select community options -->
 <div class="form-container">
-  <form method="POST" action="{{ route('proxy-community') }}" class="community-box">
+  <form method="POST" action="{{ route('community') }}" class="community-box">
     <h3>What's your top 3 interests?</h3>
     <p class="mb-4">Get started by joining the communities of your choice.</p> 
       @csrf
@@ -26,7 +25,7 @@
           @endforeach
         </select>
       </div>
-      <div class="mb-2">
+      <div class="mb-3">
         <select id="thirdDropbox" name="community[2]" class="form-select">
           <option value="">Choose 3rd community..</option>
           @foreach($communities as $community)
@@ -40,7 +39,7 @@
   </form>
 </div>
 
-<!-- <form method="POST" action="{{ route('proxy-community') }}">
+<!-- <form method="POST" action="{{ route('community') }}">
 @csrf
   <p>
     <input type="checkbox" name="community[architecture]" id="architecture" value="Architecture">

@@ -24,7 +24,7 @@ class OrganizationalSubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return view('organizational-subscription');
     }
 
     /**
@@ -35,7 +35,25 @@ class OrganizationalSubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fullName' => ['required', 'string', 'max:255'],
+            'emailAddress' => ['required', 'string', 'email', 'max:255'],
+            'companyName' => ['required', 'string', 'max:255'],
+            'companySize' => ['required', 'integer', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'details' => ['required', 'string'],
+        ]);
+
+        $organizationalSubscription = OrganizationalSubscription::create([
+            'fullName' => $request->fullName,
+            'emailAddress' => $request->emailAddress,
+            'companyName' => $request->companyName,
+            'companySize' => $request->companySize,
+            'country' => $request->country,
+            'details' => $request->details
+        ]);
+
+        return redirect('/subscription');
     }
 
     /**

@@ -9,6 +9,8 @@ class Feedback extends Model
 {
     use HasFactory;
 
+    protected $table = 'feedbacks';
+    
     protected $primaryKey = 'feedbackId';
 
     /**
@@ -17,7 +19,7 @@ class Feedback extends Model
      * @var array<int, string>
      */
 
-    protected $fillabele = [
+    protected $fillable = [
         'userId',
         'dateFeedbackAnswered',
         'type',

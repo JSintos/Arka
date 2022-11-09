@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -6,7 +6,6 @@
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
-
 
         <title>@yield('title')</title>
         <link href = "{{asset('css/styles.css')}}" rel="stylesheet" />
@@ -18,15 +17,10 @@
         <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')}}"></script>
         <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')}}">
         <link href="{{asset('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js')}}">
-        <!-- logo -->
-        <nav class="navbar sticky-top navbar-expand-lg bg-light">
-        <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-        <img src="images/logoarka.png" alt="logo">
-        </a>
     </head>
+
     <body>
-        <div id="app">
+        <div class="app">
             @yield('content')
             @include('layouts.footer')
         </div>

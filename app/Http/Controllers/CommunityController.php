@@ -29,7 +29,7 @@ class CommunityController extends Controller
     {
         $communities = Community::all();
 
-        return view('proxy-community')->with(array('communities' => $communities));
+        return view('community')->with(array('communities' => $communities));
     }
 
     /**

@@ -1,13 +1,12 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Password')
-</div>
-</nav>
+@section('title','ARKA-Account Settings')
 <section class="flex-column min-vh-100 justify-content-center align-items-center mt-5 p-5">
-<div class="container ">
+<div class="container">
     <!-- <div class="row"> -->
         <div class="col-md-10 offset-2 mx-auto rounded shadow bg-white">
-            <div class="panel panel-box">
+            <div class="panel panel-box ml-5">
                 <h2>Change password</h2> 
 
                 <div class="panel-body">
@@ -65,11 +64,11 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('proxy-update-user') }}">
+                        <div class="button">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('update-user') }}">
                                 {{ __('Go Back') }}
                             </a>
-                            <x-button class="ml-4">
+                            <x-button class="secondary-btn ml-4 second-text">
                                 {{ __('Change Password') }}
                             </x-button>
                     </form>

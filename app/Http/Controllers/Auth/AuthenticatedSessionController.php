@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         if($user->communityList == null)
         {
-            return redirect('/proxy-community');
+            return redirect('/community');
         }
         else
         {

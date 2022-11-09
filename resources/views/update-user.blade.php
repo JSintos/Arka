@@ -1,13 +1,13 @@
 @extends('layouts.header')
+@include('layouts.navbar')
 @section('content')
-@section('title','Account Settings')
-</div>
-</nav>
+@section('title','ARKA-Account Settings')
+
 
 <div class="form-container">
     <div class="row justify-content-center">
             <div class="user-card">
-                <div class="card-header" style="text-align: center"><i class='fa fa-user'></i>{{Auth::user()->username}}'s Profile</div>
+                <div class="card-header" style="text-align: center"><i class='fa fa-user mr-3'></i>{{Auth::user()->username}}'s Profile</div>
                         @if ($errors->any())
                             <div class="mb-3">
                             <ul>
@@ -25,7 +25,7 @@
                         </div>
                         @endif
                 <div class="card-body">
-                    <form action="{{route('proxy-update-user')}}" method="POST">
+                    <form action="{{route('update-user')}}" method="POST">
                     @csrf
                         <div class="mt-4">
                            <label for="name" class="form-label"><strong>Name:</strong></label>
