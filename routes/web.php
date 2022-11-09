@@ -54,16 +54,16 @@ Route::post('change-password', [UserController::class, 'changePassword']);
 Route:: get('monthly-feedback', [FeedbackController:: class, 'create'])
                 ->name('monthly-feedback');
 
-// Route::get('/chat', [ChatsController::class, 'index']);
+Route::get('/chat', [ChatsController::class, 'index']);
 
-Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
+// Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
 
 Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 
-Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
+// Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
 
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
-Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
+// Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
 
 require __DIR__.'/auth.php';

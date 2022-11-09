@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $community->communityName }}</h5>
 
-                        <a href="{{ route('communityChat', $community->communityId) }}" class="card-link">Go inside</a>
+                        <a href="/chat" class="card-link">Go inside</a>
                     </div>
                 </div>
             </div>
