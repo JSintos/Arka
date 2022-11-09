@@ -9,4 +9,7 @@ class Community extends Model
 {
     use HasFactory;
 
+    public function chatMessages(){
+        return $this->hasMany(Chat_Message::class);
+    }
 }
