@@ -91,7 +91,7 @@ class SubscriptionController extends Controller
         $id = Auth::user()->userId;
         
         if (Subscription::where('userId', '=', $id)->exists()) {
-            return redirect('subscription')->with("error", "You already have a premium subscription");    
+            return redirect('proxy-subscription')->with("error", "You already have a premium subscription");    
         }
         else{
             return view('gcash-payment');

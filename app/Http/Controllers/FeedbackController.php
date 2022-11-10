@@ -34,7 +34,7 @@ class FeedbackController extends Controller
 
         $testdate = $date->diffInDays($now);
  
-        if($testdate >= 30  &&  $now->dayOfWeek === Carbon::FRIDAY)
+        if($testdate >= 30  &&  $now->dayOfWeek === Carbon::THURSDAY)
         {
             $valid = true;
         }

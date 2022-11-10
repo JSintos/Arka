@@ -77,12 +77,15 @@ Route:: get('practice', [FeedbackController:: class, 'create'])
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('subscription');
+                ->name('subscription'); 
 
 Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                 ->name('organizational-subscription');
 
 Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
+
+Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
+                ->name('proxy-subscription'); 
 
 Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                 ->name('gcash-payment');
