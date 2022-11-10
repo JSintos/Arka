@@ -77,7 +77,7 @@ Route:: get('practice', [FeedbackController:: class, 'create'])
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('subscription');
+                ->name('proxy-subscription');
 
 Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                 ->name('organizational-subscription');
@@ -89,29 +89,36 @@ Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
 
 Route:: post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
-Route::get('/admin/subscriptions', [AdminController:: class, 'getAdminPanel'])
-                ->name('/admin/subscriptions');
+Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
+//     //admin routes
+   
+    Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
-Route::post('/admin/subscriptions', [AdminController:: class, 'verifySubscription']);
+    Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
-Route::get('/admin/community', [AdminController:: class, 'indexCommunity'])
-                ->name('/admin/community');
+    Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
+                ->name('admin/community');
 
-Route::get('/admin/community/{id}', [AdminController:: class, 'showCommunity'])
-                ->name('/admin/community/{id}');
 
-Route::post('/admin/community/create', [AdminController:: class, 'storeCommunity']);
+    Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
 
-Route::get('/admin/community/create', [AdminController:: class, 'createCommunity'])
-                ->name('/admin/community/create');
+    Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
+                ->name('admin/community/create');
                 
 
-Route::get('/admin/community/{id}/delete', [AdminController:: class, 'destroyCommunity'])
-                ->name('/admin/community/{id}/delete');
+    Route::post('admin/community/{community}/delete', [AdminController:: class, 'destroyCommunity'])
+                ->name('admin/community/{community}/delete');
 
-Route::post('/admin/community/edit', [AdminController:: class, 'updateCommunity']);
+    Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
 
-Route::get('/admin/community/{id}/edit', [AdminController:: class, 'editCommunity'])
-                ->name('/admin/community/{id}/edit');
-                
+    Route::get('admin/community/{community}/edit', [AdminController:: class, 'editCommunity'])
+                ->name('admin/community/{community}/edit');
+
+    Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+
+    });
+
+
+   
+         
 require __DIR__.'/auth.php';

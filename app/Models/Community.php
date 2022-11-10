@@ -9,4 +9,9 @@ class Community extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'communityId';
+
+    protected $fillable = [
+        'communityName'
+    ];
 }
