@@ -42,10 +42,10 @@
         </div>
     </section>
 <!-- About Us section -->
-    <section class="about"id="about">
+<section class="about"id="about">
         <div class="about-img">
         <img src="images/About.png">
-      </div> 
+      </div>  
       <div class="about-text">
         <h2>Find your study partner</h2>
         <p>ARKA  is the shortened version of “Aral Kaibigan”. It is a web-based
@@ -54,6 +54,7 @@
           who wish to collaborate and find peers with the same interests. </p>
       </div>
     </section>
+
 <!-- Offers section -->
     <section class="offers" id="offers">
       <h2>Simple plans made for you</h2>
@@ -91,7 +92,7 @@
                 <h4><strong>Organization</strong> </h4>
                 <h6>For ₱1,464 annually</h6>
                 <p>Have a max of 25 Arka communities and a max of 15 Arka users in a room</p>
-                <a class="offer-btn" href="{{ route('contact-sales') }}">Contact sales</a>
+                <a class="offer-btn" href="{{ route('organizational-subscription') }}"">Contact sales</a>
               </div>
             </div>
         </div>

@@ -1,47 +1,53 @@
 @extends('layouts.header')
 @include('layouts.navbar')
 @section('content')
-@section('title','ARKA-Subscription')
+@section('title','ARKA-Subscriptions')
 
-
-<div class="container justify-content-center align-items-center mt-5 ">
-    <div class="row justify-content-center mt-0">
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 ">
-            <div class="card p-5 mt-3 mb-3">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+    <div class="container">
+                        @if ($errors->any())
+                            <div class="mb-4">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>
+                                    {{$error}}
+                                </li>
+                                @endforeach
+                            </ul>
+                            </div>
+                        @endif
+                        @if(session()->get('message'))
+                        <div class="alert alert-success" role="alert">
+                            <strong>Success: </strong>{{session()->get('message')}}
+                        </div>
+                        @endif
+    <div class="row m-5">
+        <div class="text-center">
+            <h2>Choose your subscription plan</h2>
+        </div>
+        <div class="col-md-6 p-5">
+            <div class="scard">
+                <div class="scard-body">
+                    <h5 class="scard-title">Premium (Individual)</h5>
+                    <p class="card-text">For as low as P135</p>
+                    <p class="card-text">Join a maximum of 25 communities.</p>
+                    <p class="card-text">Have a maximum of 15 Arka users per room.</p>
+                    <a href="gcash-payment" class="subscribe-btn">Subscribe Now</a>
                 </div>
-                <h2>Upgrade your Subscription</h2>
-                <p>Experience more with our premium plans.</p>
-                <div class="row">
-                        <div class="col-12">
-                           <label class="form-label"></label>
-                             <select class=" form-select" aria-label="Default select example">
-                                <option selected>Choose a subscription plan</option>
-                                <option value="">Individual Premium Plan</option>
-                                <option value="">Organizational Plan</option>
-                            </select>
-                        </div>
-                        <div class="col-12 ">
-                           <label class="form-label mt-4"></label>
-                             <select class=" form-select" aria-label="Default select example">
-                                <option selected>Choose your payment plan</option>
-                                <option value="">Monthly</option>
-                                <option value="">Yearly</option>
-                            </select>
-                        </div>
-
-                        <div class="col-12 button mt-5">
-                            <a class="nav-link secondary-btn" href="{{ route('payment-portal') }}" >Proceed</a>
-            
-                        </div>
+            </div>
+        </div>
+        <div class="col-md-6 p-5">
+            <div class="scard"> 
+                <div class="scard-body">
+                    <h5 class="scard-title">Premium (Organization)</h5>
+                    <p class="card-text" >Pay annually for only P1,464</p>
+                    <p class="card-text" >Bring Arka as part of your organization.</p>
+                    <p class="card-text">20% cheaper than purchasing normal premium </p>
+                    <a href="organizational-subscription" class="subscribe-btn">Contact Sales Now</a>
                 </div>
-                
             </div>
         </div>
     </div>
+    </div>
 
-
-</div>
 
 @endsection
