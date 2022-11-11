@@ -8,7 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\OrganizationalSubscriptionController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\ChatMessagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,7 +73,7 @@ Route:: get('monthly-feedback', [FeedbackController:: class, 'showMonthlyFeedbac
 Route:: post('monthly-feedback', [FeedbackController:: class, 'monthlyFeedback']);
 
 Route:: get('practice', [FeedbackController:: class, 'create'])
-                ->name('practice');                
+                ->name('practice');
 
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
@@ -107,7 +108,7 @@ Route::post('/admin/community/create', [AdminController:: class, 'storeCommunity
 
 Route::get('/admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('/admin/community/create');
-                
+
 
 Route::get('/admin/community/{id}/delete', [AdminController:: class, 'destroyCommunity'])
                 ->name('/admin/community/{id}/delete');
@@ -116,5 +117,17 @@ Route::post('/admin/community/edit', [AdminController:: class, 'updateCommunity'
 
 Route::get('/admin/community/{id}/edit', [AdminController:: class, 'editCommunity'])
                 ->name('/admin/community/{id}/edit');
-                
+
+Route::get('/chat', [ChatsController::class, 'index']);
+
+// Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
+
+Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+
+// Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
+
+Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
+// Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
+
 require __DIR__.'/auth.php';

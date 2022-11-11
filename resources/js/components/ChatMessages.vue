@@ -6,8 +6,7 @@
                 <div class="message-content">{{ message.message }}</div>
             </div>
         </div>
-        </div>
-        
+    </div>
 </template>
 
 <style scoped>
