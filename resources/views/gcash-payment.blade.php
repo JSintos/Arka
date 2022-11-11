@@ -1,20 +1,22 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/dashboard">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-
+@extends('layouts.header')
+@include('layouts.navbar')
+@section('content')
+@section('title','ARKA-Payment')
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="text-align: center;" >Image of Gcash Account</div>
-                <p>After paying through GCash, please fill out the required details below.</p>
-                <p>Premium subscription will be applied to your account after verfication of payment.</p>
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 ">
+            <div class="card p-5 mt-3 mb-3">
+                <div class="col-10 align-self-center mb-0">
+                        <h3>Payment</h3>
+                        <p>You may scan this QR code to pay your subscription via GCash.</p>
+                    </div>
+                <div>
+                    <img src="../images/qr.jpg" alt="qrcode" class="pimg-fluid mx-auto ">
+                </div>
+                <div class="mt-4 text-justify" >
+                    <p>After payment, please fill out the required details below. Premium subscription will be applied to your account after verfication of payment.</p>
+                </div>
                     <div class="container">
                         @if ($errors->any())
                             <div class="mb-4">
@@ -35,18 +37,16 @@
                 <div class="card-body">
                     <form action="{{route('gcash-payment')}}" method="POST">
                     @csrf
-                        <div class="mt-4">
+                        <div>
                            <label for="referenceNumber"><strong>Reference Number:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="referenceNumber" name="referenceNumber" required>
+                           <input type="text" class="form-control" id ="referenceNumber" name="referenceNumber" required>
                        </div>
                        <div class="mt-4">
                            <label for="phoneNumber"><strong>Phone Number:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="phoneNumber" name="phoneNumber" required>
+                           <input type="text" class="form-control" id ="phoneNumber" name="phoneNumber" required>
                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <x-button class="ml-4">
-                                {{ __('Submit') }}
-                            </x-button>
+                       <div class="col-12 mt-4 button">
+                            <button type="submit" class="secondary-btn">Submit</button>
                         </div>
                     </form>
                 
@@ -55,5 +55,4 @@
         </div>
 </div>
 
-</x-auth-card>
-</x-guest-layout>
+@endsection
