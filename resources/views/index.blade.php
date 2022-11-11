@@ -80,7 +80,7 @@
                 <h4><strong>Individual</strong> </h4>
                 <h6>For as low as ₱135</h6>
                 <p>Have a max of 25 Arka communities and a max of 15 Arka users in a room</p>
-                <a class="offer-btn" href="{{ route('login') }}">Subscribe now</a>
+                <a class="offer-btn" href="{{ route('subscription') }}">Subscribe now</a>
               </div>
             </div>
 
@@ -92,7 +92,7 @@
                 <h4><strong>Organization</strong> </h4>
                 <h6>For ₱1,464 annually</h6>
                 <p>Have a max of 25 Arka communities and a max of 15 Arka users in a room</p>
-                <a class="offer-btn" href="{{ route('organizational-subscription') }}"">Contact sales</a>
+                <a class="offer-btn" href="{{ route('organizational-subscription') }}">Contact sales</a>
               </div>
             </div>
         </div>
