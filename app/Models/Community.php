@@ -14,4 +14,8 @@ class Community extends Model
     protected $fillable = [
         'communityName'
     ];
+    
+    public function chatMessages(){
+        return $this->hasMany(Chat_Message::class);
+    }
 }

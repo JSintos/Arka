@@ -1,62 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
+@extends('layouts.header')
+@include('layouts.navbar')
+@section('content')
+@section('title','ARKA-Feedback')
     <meta name="valid" content="{{ $valid }}">
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Monthly Academic Performance Feedback</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                   <h3 style="text-align: center;">Rate your academic performance for the previous month</h3>
-                   <form method="POST" action="{{ route('practice') }}">
-                    @csrf
-                    <p>
-
-                    <select id="monthlyFeedback" name="monthlyFeedback">
-                        <!-- <div class="dropdown-content">
-                            <option value = "1">1</option>    
-                            <option value = "2">2</option>
-                            <option value = "3">3</option>
-                            <option value = "4">4</option>
-                            <option value = "5">5</option>
-                        </div> -->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <div class="dropdown-menu">
-                                <option value = "1">1</option>
-                                <option value = "2">2</option>
-                                <option value = "3">3</option>
-                                <option value = "4">4</option>
-                                <option value = "5">5</option>
+                <form method="POST" action="{{ route('practice') }}">
+                        @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Monthly academic performance check!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <h3 style="text-align: center;">Rate your academic performance for the previous month</h3>
+                        <p>
+                        <div class="rating" id="monthlyFeedback" name="monthlyFeedback">
+                            <div class="star-icon">
+                                <input type="radio" value="1" name="rating" checked id="rating1" >
+                                <label for="rating1" class="fa fa-star"></label>
+                                <input type="radio" value="2" name="rating" id="rating2">
+                                <label for="rating2" class="fa fa-star"></label>
+                                <input type="radio" value="3" name="rating" id="rating3">
+                                <label for="rating3" class="fa fa-star"></label>
+                                <input type="radio" value="4" name="rating" id="rating4">
+                                <label for="rating4" class="fa fa-star"></label>
+                                <input type="radio" value="5" name="rating" id="rating5">
+                                <label for="rating5" class="fa fa-star"></label>
                             </div>
                         </div>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -101,18 +84,12 @@
     </script>
     <script>
         // window.userId = {{ auth()->id()}};
-
         var valid = $('meta[name="valid"]').attr('content');
-
         $(document).ready(function(){
                 if(valid){
                 $('#exampleModal').modal('show');
                 }
-
-
         });    
     </script>
 
-  </body>
-
-</html>
+@endsection

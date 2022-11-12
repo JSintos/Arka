@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\OrganizationalSubscriptionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\ReportController;
 
 
@@ -75,17 +76,20 @@ Route:: get('monthly-feedback', [FeedbackController:: class, 'showMonthlyFeedbac
 Route:: post('monthly-feedback', [FeedbackController:: class, 'monthlyFeedback']);
 
 Route:: get('practice', [FeedbackController:: class, 'create'])
-                ->name('practice');                
+                ->name('practice');
 
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('proxy-subscription');
+                ->name('subscription'); 
 
 Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                 ->name('organizational-subscription');
 
 Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
+
+Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
+                ->name('proxy-subscription'); 
 
 Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                 ->name('gcash-payment');
@@ -114,9 +118,6 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('admin/community/create');
-                
-    // Route::get('admin/community/{community}/delete', [AdminController:: class, 'deleteCommunity'])
-    //             ->name('admin/community/{community}/delete');
 
     Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
                 ->name('admin/community/delete');
@@ -128,11 +129,19 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
                 ->name('admin/community/{community}/edit');
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+});
 
-    });
+Route::get('/chat', [ChatsController::class, 'index']);
 
+// Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
 
-   
-         
+Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+
+// Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
+
+Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
+// Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
+
 require __DIR__.'/auth.php';
 
