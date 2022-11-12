@@ -5662,17 +5662,23 @@ var app = new Vue({
     },
     firstBadge: function firstBadge(data) {
       axios.post("/commend/1/".concat(data.userId)).then(function (response) {
-        console.log(response.data);
+        alert(response.data.status);
       });
     },
     secondBadge: function secondBadge(data) {
-      axios.post("/commend/2/".concat(data.userId)).then(function (response) {});
+      axios.post("/commend/2/".concat(data.userId)).then(function (response) {
+        alert(response.data.status);
+      });
     },
     thirdBadge: function thirdBadge(data) {
-      axios.post("/commend/3/".concat(data.userId)).then(function (response) {});
+      axios.post("/commend/3/".concat(data.userId)).then(function (response) {
+        alert(response.data.status);
+      });
     },
     reportUser: function reportUser(data) {
-      console.log(data); // axios.post(`/report/${data.userId}`, data).then((response) => {});
+      axios.post("/report/".concat(data.userId), data).then(function (response) {
+        alert(response.data.status);
+      });
     } // fetchChatMessages() {
     //     //GET request to the messages route in our Laravel server to fetch all the messages
     //     axios.get("/chatmessages").then((response) => {

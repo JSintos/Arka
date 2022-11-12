@@ -4,6 +4,22 @@
 @section('title','Chat')
 
 <div class="container">
+    @if ($errors->any())
+        <div class="mb-4">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>
+                {{$error}}
+            </li>
+            @endforeach
+        </ul>
+        </div>
+    @endif
+    @if(session()->get('message'))
+    <div class="alert alert-success" role="alert">
+        <strong>Success: </strong>{{session()->get('message')}}
+    </div>
+    @endif
     <div class="card">
         <div class="card-header">Chats</div>
         <div class="card-body">

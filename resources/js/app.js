@@ -83,19 +83,23 @@ const app = new Vue({
         },
         firstBadge(data) {
             axios.post(`/commend/1/${data.userId}`).then((response) => {
-                console.log(response.data);
+                alert(response.data.status);
             });
         },
         secondBadge(data) {
-            axios.post(`/commend/2/${data.userId}`).then((response) => {});
+            axios.post(`/commend/2/${data.userId}`).then((response) => {
+                alert(response.data.status);
+            });
         },
         thirdBadge(data) {
-            axios.post(`/commend/3/${data.userId}`).then((response) => {});
+            axios.post(`/commend/3/${data.userId}`).then((response) => {
+                alert(response.data.status);
+            });
         },
         reportUser(data) {
-            console.log(data);
-
-            // axios.post(`/report/${data.userId}`, data).then((response) => {});
+            axios.post(`/report/${data.userId}`, data).then((response) => {
+                alert(response.data.status);
+            });
         },
         // fetchChatMessages() {
         //     //GET request to the messages route in our Laravel server to fetch all the messages

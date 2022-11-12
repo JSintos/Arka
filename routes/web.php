@@ -127,8 +127,8 @@ Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
 // Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
 
-Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
+Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
-Route::post('/report/{userId}', [HomeController::class, 'reportUser']);
+Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
 require __DIR__.'/auth.php';
