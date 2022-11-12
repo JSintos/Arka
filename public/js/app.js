@@ -5391,8 +5391,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["messages"]
+  props: ["messages", "user"],
+  methods: {
+    firstBadge: function firstBadge(id) {
+      this.$emit("firstbadge", {
+        userId: id
+      });
+    },
+    secondBadge: function secondBadge(id) {
+      this.$emit("secondbadge", {
+        userId: id
+      });
+    },
+    thirdBadge: function thirdBadge(id) {
+      this.$emit("thirdbadge", {
+        userId: id
+      });
+    },
+    reportUser: function reportUser(id) {
+      var reportDesc = prompt();
+      this.$emit("reportuser", {
+        userId: id,
+        reportDescription: reportDesc
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5606,7 +5660,20 @@ var app = new Vue({
       axios.post("/messages", message).then(function (response) {// console.log(response.data);
       });
     },
-    // fetchChatMessages() {
+    firstBadge: function firstBadge(data) {
+      axios.post("/commend/1/".concat(data.userId)).then(function (response) {
+        console.log(response.data);
+      });
+    },
+    secondBadge: function secondBadge(data) {
+      axios.post("/commend/2/".concat(data.userId)).then(function (response) {});
+    },
+    thirdBadge: function thirdBadge(data) {
+      axios.post("/commend/3/".concat(data.userId)).then(function (response) {});
+    },
+    reportUser: function reportUser(data) {
+      console.log(data); // axios.post(`/report/${data.userId}`, data).then((response) => {});
+    } // fetchChatMessages() {
     //     //GET request to the messages route in our Laravel server to fetch all the messages
     //     axios.get("/chatmessages").then((response) => {
     //         //Save the response in the messages array to display on the chat view
@@ -5614,16 +5681,20 @@ var app = new Vue({
     //     });
     // },
     //Receives the message that was emitted from the ChatForm Vue component
-    addChatMessage: function addChatMessage(message) {
-      //Pushes it to the messages array
-      this.chatmessages.push(message.message); //POST request to the messages route with the message data in order for our Laravel server to broadcast it.
+    // addChatMessage(message) {
+    //     //Pushes it to the messages array
+    //     this.chatmessages.push(message.message);
+    //     //POST request to the messages route with the message data in order for our Laravel server to broadcast it.
+    //     axios
+    //         .post("/chatmessages", {
+    //             message: message.message,
+    //             communityId: message.commId,
+    //         })
+    //         .then((response) => {
+    //             // console.log(response.data);
+    //         });
+    // },
 
-      axios.post("/chatmessages", {
-        message: message.message,
-        communityId: message.commId
-      }).then(function (response) {// console.log(response.data);
-      });
-    }
   }
 });
 
@@ -35344,8 +35415,83 @@ var render = function () {
               _vm._v(
                 "\n                    " +
                   _vm._s(message.user.username) +
-                  "\n                "
+                  "\n                    "
               ),
+              message.user_userId !== _vm.user.userId
+                ? _c("span", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.firstBadge(message.user.userId)
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            badge # 1\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.secondBadge(message.user.userId)
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            badge # 2\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-info",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.thirdBadge(message.user.userId)
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            badge # 3\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.reportUser(message.user.userId)
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                            report\n                        "
+                        ),
+                      ]
+                    ),
+                  ])
+                : _vm._e(),
             ]),
           ]),
           _vm._v(" "),
