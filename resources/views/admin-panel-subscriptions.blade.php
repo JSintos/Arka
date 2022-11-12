@@ -29,8 +29,8 @@
       </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" href="subscriptions">Subscriptions <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="community">Communities</a>
+        <a class="nav-link active" href="{{url('admin/subscriptions')}}">Subscriptions <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{{url('admin/community')}}">Communities</a>
         <a class="nav-link" href="">Reports</a>
         <a class="nav-link" href="feedbacks">Feedback</a>
         <a class="nav-link" href="">Badges Leaderboard</a>

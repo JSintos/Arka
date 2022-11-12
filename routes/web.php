@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\OrganizationalSubscriptionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReportController;
 
 
 /*
@@ -51,6 +52,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+
 Route::get('community', [CommunityController::class, 'create'])
                 ->name('community');
 
@@ -89,6 +92,12 @@ Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
 
 Route:: post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
+Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
+                ->name('request-community');
+
+Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
+});
+
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
 //     //admin routes
    
@@ -98,16 +107,20 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
                 ->name('admin/community');
-
+    
+    Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
 
     Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
 
     Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('admin/community/create');
                 
+    // Route::get('admin/community/{community}/delete', [AdminController:: class, 'deleteCommunity'])
+    //             ->name('admin/community/{community}/delete');
 
-    Route::post('admin/community/{community}/delete', [AdminController:: class, 'destroyCommunity'])
-                ->name('admin/community/{community}/delete');
+    Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
+                ->name('admin/community/delete');
+                
 
     Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
 
@@ -122,3 +135,4 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
    
          
 require __DIR__.'/auth.php';
+

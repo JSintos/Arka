@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Subscription;
 use App\Models\Community;
 use App\Models\Feedback;
+use App\Models\Report;
+use App\Models\Chart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -36,10 +39,33 @@ class AdminController extends Controller
     public function indexCommunity()
     {
         $communities = Community::get();
+        $petitions = DB::table('reports')
+                        ->select('reportDescription', DB::raw('count(*) as Count'))
+                        ->where('status', '=', '3')
+                        ->where('resolutionStatus', '=', '0')
+                        ->groupBy('reportDescription')
+                        ->get();
+
     
-        return view('admin-panel-communities',compact('communities'));
+        return view('admin-panel-communities',compact('communities', 'petitions'));
     }
 
+    public function createPetitionedCommunity(Request $request)
+    {
+        $request->validate([
+            'reportDescription' => 'required', 'unique::communities,communityName'
+        ]);
+        $communityName = $request['reportDescription'];
+
+        Community::create([
+            'communityName' => $communityName
+        ]);
+
+        $update = Report::where('reportDescription', $communityName);
+        $update -> update(['resolutionStatus' => '1']);
+
+        return redirect('admin/community')->with('success', 'Petitioned Community created successfully!');
+    }
 
     public function createCommunity()
     {
@@ -75,20 +101,56 @@ class AdminController extends Controller
 
         return redirect('/admin/community')->with('success', 'Community updated successfully!');
     }
+    
+    // public function deleteCommunity(Request $request)
+    // {
+    //     $remove = Community::find($community);
 
-    public function destroyCommunity(Community $community)
+    //     return view('projects.delete', compact('remove'));
+    // }
+    public function destroyCommunity(Request $request)
     {
-        $community->delete();
+        // $community->delete();
 
-        return redirect('/admin/community')->with('success', 'Community deleted successfully!');
+        // return redirect('/admin/community')->with('success', 'Community deleted successfully!');
+
+        $community = Community::find($request->community_delete_id);
+
+        if($community)
+        {
+            $community->delete();
+            return redirect('/admin/community')->with('success', 'Community deleted successfully!');
+        }
+        else
+        {
+            return redirct('/admin/community')->with('error', 'Community not found.');
+        }
+        
     }
 
     public function indexFeedback()
     {
-        $roomFeedbacks = Feedback::where('type', 0)->get();
-        $monthlyFeedbacks = Feedback::where('type', 1)->get();
+        // $roomFeedbacks = Feedback::where('type', 0)->get();
+        // $monthlyFeedbacks = Feedback::where('type', 1)->get();
 
-        return view('admin-panel-feedbacks', compact('roomFeedbacks', 'monthlyFeedbacks'));
+        // return view('admin-panel-feedbacks', compact('roomFeedbacks', 'monthlyFeedbacks'));
+
+        // $current_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
+        // ->whereMonth('created_at', Carbon::now()->month)->count();
+        // $before_1_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
+        // ->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+        // $before_2_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
+        // ->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+        // $before_3_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
+        // ->whereMonth('created_at', Carbon::now()->subMonth(3))->count();
+        // $feedbacksCount = array($current_month_feedbacks, $before_1_month_feedbacks, 
+        // $before_2_month_feedbacks, $before_3_month_feedbacks);
+
+        // return view('admin-panel-feedbacks')->with(compact('feedbacksCount'));
+
+        $feedbacks = Feedback::all();
+        return view('admin-panel-feedbacks', ['feedbacks' => $feedbacks]);
+
 
     }
 
