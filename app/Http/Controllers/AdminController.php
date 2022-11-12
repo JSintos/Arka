@@ -81,7 +81,7 @@ class AdminController extends Controller
 
         Community::create($request->all());
 
-        return redirect('/admin/community')->with('success', 'Community createed successfully!');
+        return redirect('/admin/community')->with('success', 'Community created successfully!');
 
     }
 

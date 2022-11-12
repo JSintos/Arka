@@ -7,7 +7,7 @@
             id="btn-input"
             type="text"
             name="message"
-            class="form-control input-field"
+            class="form-control  input-field"
             placeholder="Type your message here..."
             v-model="newMessage"
             @keyup.enter="sendMessage"
@@ -16,7 +16,7 @@
         <span class="input-group-btn">
             <!-- Call sendMessage() this button is clicked. -->
             <button
-            class="btn send-btn"
+            class="form-control send-btn"
                 id="btn-chat"
                 @click="sendMessage"
             >
@@ -32,9 +32,9 @@
     border: none;
     outline: none;
     background: none;
-    display: block;
+    display: inline-block;
     width: 100%;
-    height: 50px;
+    height: 48px;
     padding: 10px 15px;
     border-radius: 8px 0px 0px 8px;
     color: #333;
@@ -48,7 +48,7 @@
     border: none;
     outline: none;
     background: none;
-    display: block;
+    display: inline-block;
     padding: 10px 15px;
     border-radius: 0px 8px 8px 0px;
     background-color: #90CCF4;
