@@ -1,9 +1,10 @@
+
 @extends('layouts.admin-header')
 @include('layouts.admin-nav')
 @section('content')
 @section('title','ARKA-Admin')
 <div class="container p-5">
-<nav>
+    <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Unverified Subscriptions</button>
         <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Verified Subscriptions</button>

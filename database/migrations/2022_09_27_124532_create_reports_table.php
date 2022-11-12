@@ -18,7 +18,7 @@ class CreateReportsTable extends Migration
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('userId')->on('users');
             $table->text('reportDescription');
-            $table->unsignedBigInteger('reportedUserId');
+            $table->unsignedBigInteger('reportedUserId')->nullable();
             $table->foreign('reportedUserId')->references('userId')->on('users');
             $table->tinyInteger('status')->default(0);
             $table->boolean('resolutionStatus')->nullable()->default(null);

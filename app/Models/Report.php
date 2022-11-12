@@ -21,5 +21,8 @@ class Report extends Model
         'userId', 
         'reportDescription', 
         'reportedUserId',
+        'status',
+        'resolutionStatus',
+        'resolvedBy'
     ];
 }
