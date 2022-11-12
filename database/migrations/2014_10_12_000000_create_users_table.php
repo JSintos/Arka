@@ -14,13 +14,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $badgeList = array("badgeOne" => 0, "badgeTwo" => 0, "badgeThree" => 0);
+
             $table->id('userId');
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->tinyInteger('userType')->default(0);
             $table->json('communityList')->nullable()->default(null);
-            $table->json('badgeList')->nullable()->default(null);
+            $table->json('badgeList')->default(json_encode($badgeList));
             $table->dateTime('subscriptionDate')->nullable()->defaul(null);
             $table->boolean('isVerified')->default(false);
             $table->rememberToken();

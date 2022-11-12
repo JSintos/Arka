@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-header">Chats</div>
         <div class="card-body">
-            <chat-messages v-on:firstbadge="firstBadge" v-on:secondbadge="secondBadge" v-on:thirdbadge="thirdBadge" v-on:reportuser="reportUser" :messages="messages"></chat-messages>
+            <chat-messages v-on:firstbadge="firstBadge" v-on:secondbadge="secondBadge" v-on:thirdbadge="thirdBadge" v-on:reportuser="reportUser" :messages="messages" :user="{{ Auth::user() }}"></chat-messages>
         </div>
         <div class="card-footer">
             <chat-form v-on:messagesent="addMessage" :user="{{ Auth::user() }}"></chat-form>
