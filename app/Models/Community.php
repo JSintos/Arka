@@ -9,6 +9,12 @@ class Community extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'communityId';
+
+    protected $fillable = [
+        'communityName'
+    ];
+    
     public function chatMessages(){
         return $this->hasMany(Chat_Message::class);
     }

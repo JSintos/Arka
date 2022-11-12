@@ -1,18 +1,14 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/dashboard">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-
-
+@extends('layouts.header')
+@include('layouts.navbar')
+@section('content')
+@section('title','ARKA-Contact Sales')
+<div class="sales">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="text-align: center;" ></div>
+        <h2>Contact our Sales Team</h2>
+        <p>Let's discuss more of our offers with you.</p> 
+            <div class="card mb-4">
                     <div class="container">
                         @if ($errors->any())
                             <div class="mb-4">
@@ -35,38 +31,37 @@
                     @csrf
                         <div class="mt-4">
                            <label for="fullName"><strong>Full Name:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="fullName" name="fullName" required>
+                           <input type="text" class="form-control" id ="fullName" name="fullName" required>
                        </div>
                        <div class="mt-4">
                            <label for="emailAddress"><strong>Email:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="emailAddress" name="emailAddress" required>
+                           <input type="text" class="form-control" id ="emailAddress" name="emailAddress" required>
                        </div>
                        <div class="mt-4">
                            <label for="companyName"><strong>Company Name:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="companyName"  name="companyName" required>
+                           <input type="text" class="form-control" id ="companyName"  name="companyName" required>
                        </div>
                        <div class="mt-4">
                            <label for="companySize"><strong>Company Size:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="companySize" name="companySize" required>
+                           <input type="text" class="form-control" id ="companySize" name="companySize" required>
                        </div>
                        <div class="mt-4">
                            <label for="country"><strong>Country:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="country" name="country"  required>
+                           <input type="text" class="form-control" id ="country" name="country"  required>
                        </div>
                        <div class="mt-4">
                            <label for="details"><strong>Anything else?</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="details" name="details"  required>
+                           <input type="text" class="form-control" id ="details" name="details"  required>
                        </div>
-                       <div class="flex items-center justify-end mt-4">
-                        <x-button class="ml-4">
-                                {{ __('Submit') }}
-                        </x-button>
+                       <div class="col-12 mt-5 button">
+                            <button type="submit" class="secondary-btn">Submit</button>
+                        </div>
                     </form>
                 
                 </div>
             </div>
         </div>
 </div>
+</div>
 
-</x-auth-card>
-</x-guest-layout>
+@endsection
