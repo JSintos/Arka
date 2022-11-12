@@ -1,0 +1,64 @@
+/* ADMIN */
+.add-btn {
+    width: 100%;
+    min-width: 50px;  
+    max-width: 300px;
+    border-radius: 0.6em;
+    align-self: center;
+    align-items: center;
+    font-size:0.875em;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    display: inline-block;
+    cursor: pointer;
+    box-sizing: border-box;
+    appearance: none;
+    border-color: #90CCF4;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #90CCF4 inset, 0 0 0 0 #90CCF4;
+    transition: all 150ms ease-in-out;
+}
+.add-btn:hover {
+    box-shadow: 0 0 10px 0 #90CCF4 inset, 0 0 10px 4px #90CCF4;
+    text-decoration: none;
+}
+
+.secondary-btn {
+    margin-top: auto;
+    width: fit-content;
+    min-width: 100px;
+    height: 40px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    background-color: #90CCF4;
+    border-radius: 15px;
+    box-shadow: 5px 2px 20px rgb(193, 193, 193);
+    color: #000;
+    font-weight:600;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    border: none;
+}
+.secondary-btn:hover {
+    background-color: rgb(48, 134, 201);
+    color: #fff;
+    box-shadow: 2px 2px 30px rgb(48, 134, 201);
+    font-weight: bold;
+    text-decoration: none;
+}
+.table {
+    margin: 0 0;
+    font-size: 16px;
+    min-width: 400px;
+    border-radius: 5px;
+}
+.table thead tr {
+    color: #fff;
+    background-color: #90CCF4;
+}
