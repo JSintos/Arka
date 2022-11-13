@@ -11,7 +11,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\ReportController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +72,7 @@ Route::post('community/{community}/add', [CommunityController::class, 'addCommun
 
 Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
                 ->name('removeCommunity');
-                
+
 Route::get('update-user', [UserController:: class, 'create'])
                 ->name('update-user');
 
@@ -127,21 +126,18 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
 
-    Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
-
     Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('admin/community/create');
 
-    Route::get('admin/community/{community}/delete', [AdminController:: class, 'editCommunity'])
-                ->name('admin/community/{community}/delete');
+    Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
 
     Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
                 ->name('admin/community/delete');
 
-    Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
-
     Route::get('admin/community/{community}/edit', [AdminController:: class, 'editCommunity'])
                 ->name('admin/community/{community}/edit');
+
+    Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
 });
