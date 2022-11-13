@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('userType')->default(0);
             $table->json('communityList')->nullable()->default(null);
             $table->json('badgeList')->default(json_encode($badgeList));
-            $table->dateTime('subscriptionDate')->nullable()->defaul(null);
             $table->boolean('isVerified')->default(false);
             $table->rememberToken();
             $table->timestamps();
