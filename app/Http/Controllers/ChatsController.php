@@ -58,8 +58,6 @@ class ChatsController extends Controller
 
         DB::table('users')->where('userId', $userId)->update(["badgeList" => json_encode($decodedArray)]);
 
-        // return view('chat')->with("success", "You've successfully commended " . $user->firstName);
-
         return ['status' => "You've successfully commended " . $user->username];
     }
 
@@ -71,8 +69,6 @@ class ChatsController extends Controller
             'reportDescription' => $request->all()["reportDescription"],
             'reportedUserId' => $reportedUserId
         ]);
-
-        // return view('chat')->with("success", 'Your report was succesfully sent.');
 
         return ['status' => 'Your report was succesfully sent.'];
     }

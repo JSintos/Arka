@@ -1,24 +1,62 @@
 <template>
     <div class="chat-box">
-        <div class="message" v-for="message in messages" :key="message.id" >
+        <div class="message" v-for="message in messages" :key="message.id">
             <div class="message-inner">
-                <div class="username">{{ message.user.username }}
-                        <span v-if="message.user_userId !== user.userId">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            More
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-item-padding-y">
-                                            <p class="ml-4">Badges:</p>
-                                            <li><a class="dropdown-item"  @click="firstBadge(message.user.userId)"><i class="fa-solid fa-heart mr-2"></i>Empath</a></li>
-                                            <li><a class="dropdown-item" @click="secondBadge(message.user.userId)"><i class="fa-solid fa-brain mr-2"></i>Genius</a></li>
-                                            <li><a class="dropdown-item" @click="thirdBadge(message.user.userId)"><i class="fa-solid fa-hand mr-2"></i>Kind</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li class="p-2"><button type="button" class="btn btn-danger" @click="reportUser(message.user.userId)"><i class="fa-solid fa-flag mr-2"></i>report</button></li>
-                                        </ul>
-                                    </div>
-                        </span>
-                    </div>
+                <div class="username">
+                    {{ message.user.username }}
+                    <span v-if="message.user_userId !== user.userId">
+                        <div class="btn-group">
+                            <button
+                                type="button"
+                                class="btn btn-sm dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                More
+                            </button>
+                            <ul class="dropdown-menu dropdown-item-padding-y">
+                                <p class="ml-4">Badges:</p>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="firstBadge(message.user.userId)"
+                                        ><i class="fa-solid fa-heart mr-2"></i
+                                        >Empath</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="
+                                            secondBadge(message.user.userId)
+                                        "
+                                        ><i class="fa-solid fa-brain mr-2"></i
+                                        >Genius</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="thirdBadge(message.user.userId)"
+                                        ><i class="fa-solid fa-hand mr-2"></i
+                                        >Kind</a
+                                    >
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li class="p-2">
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        @click="reportUser(message.user.userId)"
+                                    >
+                                        <i class="fa-solid fa-flag mr-2"></i
+                                        >report
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </div>
                 <div class="message-content">{{ message.message }}</div>
             </div>
         </div>
