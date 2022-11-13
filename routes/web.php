@@ -60,6 +60,14 @@ Route::get('community', [CommunityController::class, 'create'])
 
 Route::post('community', [CommunityController::class, 'store']);
 
+Route::get('/community-list', [CommunityController::class, 'index'])->name('community-list');
+
+Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+                ->name('addCommunity');
+
+Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+                ->name('removeCommunity');
+
 Route::get('update-user', [UserController:: class, 'create'])
                 ->name('update-user');
 
@@ -81,7 +89,7 @@ Route:: get('practice', [FeedbackController:: class, 'create'])
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('subscription'); 
+                ->name('subscription');
 
 Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                 ->name('organizational-subscription');
@@ -89,7 +97,7 @@ Route:: get('organizational-subscription', [OrganizationalSubscriptionController
 Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
 Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
-                ->name('proxy-subscription'); 
+                ->name('proxy-subscription');
 
 Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                 ->name('gcash-payment');
@@ -103,15 +111,13 @@ Route::post('request-community', [ReportController:: class, 'postRequestCommunit
 });
 
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
-//     //admin routes
-   
     Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
     Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
     Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
                 ->name('admin/community');
-    
+
     Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
 
     Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
@@ -119,9 +125,11 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
     Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('admin/community/create');
 
+    Route::get('admin/community/{community}/delete', [AdminController:: class, 'editCommunity'])
+                ->name('admin/community/{community}/delete');
+
     Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
                 ->name('admin/community/delete');
-                
 
     Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
 
@@ -133,19 +141,19 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
 Route::get('/chat', [ChatsController::class, 'index']);
 
-// Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
-
 Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 
-// Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
-
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
-
-// Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
 
 Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
 
 Route::post('/report/{userId}', [HomeController::class, 'reportUser']);
+
+// Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
+
+// Route::get('/chatmessages', [ChatMessagesController::class, 'fetchChatMessages']);
+
+// Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
 
 require __DIR__.'/auth.php';
 
