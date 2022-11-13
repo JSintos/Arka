@@ -9,7 +9,8 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\OrganizationalSubscriptionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChatsController;
-use App\Http\Controllers\ChatMessagesController;
+use App\Http\Controllers\ReportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,20 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+
 Route::get('community', [CommunityController::class, 'create'])
                 ->name('community');
 
+Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+->name('addCommunity');
+
+Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+->name('removeCommunity');
+
 Route::post('community', [CommunityController::class, 'store']);
+
+Route::get('/community-list', [CommunityController::class, 'index'])->name('community-list');
 
 Route::get('update-user', [UserController:: class, 'create'])
                 ->name('update-user');
@@ -78,7 +89,7 @@ Route:: get('practice', [FeedbackController:: class, 'create'])
 Route:: post('practice', [FeedbackController:: class, 'store']);
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('subscription'); 
+                ->name('subscription');
 
 Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                 ->name('organizational-subscription');
@@ -86,31 +97,39 @@ Route:: get('organizational-subscription', [OrganizationalSubscriptionController
 Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
 Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
-                ->name('proxy-subscription'); 
+                ->name('proxy-subscription');
 
 Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                 ->name('gcash-payment');
 
 Route:: post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
+Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
+                ->name('request-community');
+
+Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
+});
+
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
 //     //admin routes
-   
+
     Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
     Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
     Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
                 ->name('admin/community');
-
+    
+    Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
 
     Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
 
     Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
                 ->name('admin/community/create');
 
-    Route::post('admin/community/{community}/delete', [AdminController:: class, 'destroyCommunity'])
-                ->name('admin/community/{community}/delete');
+    Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
+                ->name('admin/community/delete');
+                
 
     Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
 
@@ -132,8 +151,9 @@ Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
 // Route::post('/chatmessages', [ChatMessagesController::class, 'sendChatMessage']);
 
-Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
+Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
-Route::post('/report/{userId}', [HomeController::class, 'reportUser']);
+Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
 require __DIR__.'/auth.php';
+
