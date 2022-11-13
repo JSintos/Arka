@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+const Filter = require("bad-words");
 const { default: Echo } = require("laravel-echo");
 
 require("./bootstrap");
@@ -78,7 +79,9 @@ const app = new Vue({
             this.messages.push(message);
             //POST request to the messages route with the message data in order for our Laravel server to broadcast it.
             axios.post("/messages", message).then((response) => {
-                // console.log(response.data);
+                if (response.data.status == "Message Sent!") {
+                    this.fetchMessages();
+                }
             });
         },
         firstBadge(data) {
