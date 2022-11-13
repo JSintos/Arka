@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
+use Illuminate\Support\Facades\DB;
 
 use App\Events\MessageSent;
 
@@ -59,7 +60,7 @@ class ChatsController extends Controller
 
         // return view('chat')->with("success", "You've successfully commended " . $user->firstName);
 
-        return ['status' => "You've successfully commended " . $user->firstName];
+        return ['status' => "You've successfully commended " . $user->username];
     }
 
     public function reportUser($reportedUserId, Request $request){
