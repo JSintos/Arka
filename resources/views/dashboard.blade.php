@@ -12,9 +12,13 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href='community-list'>Community List</a></li>
-                    <li class="breadcrumb-item"><a href='update-user'>Account Settings</a></li>
+                    <li class="breadcrumb-item"><a href='update-user'>Profile</a></li>
+                    @if($isSubscribed)
                     <li class="breadcrumb-item"><a href='subscription'>Subscriptions</a></li>
+                    @endif
+                    @if(Auth::user()->userType == 1)
                     <li class="breadcrumb-item"><a href='admin/subscriptions'>Admin Panel</a></li>
+                    @endif
                 </ol>
             </nav>
         </div>

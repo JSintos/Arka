@@ -26,6 +26,8 @@ class HomeController extends Controller
             }
         }
 
-        return view('dashboard')->with(array('communities' => $resultingArray));
+        $subscription = DB::table('subscriptions')->where('userId', $user->userId)->first();
+
+        return view('dashboard')->with(array('communities' => $resultingArray, 'isSubscribed' => isset($subscription)));
     }
 }

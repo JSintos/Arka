@@ -46,10 +46,6 @@ Route::get('/terms-and-condition', function () {
     return view('terms-and-condition');
 })->name('terms-and-condition');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
