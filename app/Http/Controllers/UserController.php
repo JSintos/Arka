@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -27,7 +27,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('update-user');
+        $user = Auth::user();
+        $badgeList = json_decode($user->badgeList, true);
+
+        return view('update-user')->with(array("badgeList" => $badgeList));
     }
 
     /**
@@ -72,7 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -94,14 +97,14 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        $user =Auth::user();
 
-        $user->username = $request['name']; 
-        $user->email = $request['email']; 
-        // $request['password'] = Hash::make($user->password);
-        // Hash::make($user->password) = $request['password'];
-        
+        $user = Auth::user();
+
+        $user->username = $request['name'];
+        $user->email = $request['email'];
+
         $user->save();
+
         return redirect('/dashboard');
     }
 
