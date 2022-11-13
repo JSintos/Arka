@@ -542,9 +542,7 @@ input, button, textarea {
     padding: 30px 30px 30px 30px;
     border-top: 1px solid #ccc;
 }
-.chat-form{
-    display: flex;
-}
+
 .chat-header{
     font-family: "Raleway", sans-serif;
     font-size: 20px;
@@ -553,6 +551,22 @@ input, button, textarea {
     background-color: #90CCF4;
     color: #FFF;
     font-weight: bolder;
+}
+.dropdown-menu{
+    padding: 2px;
+    margin-left: 5px;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+.dropdown li{
+    background-color: #ccc;
+    color: #000;
+}
+
+.dropdown li:hover{
+    background-color: #90CCF4;
+    color: #fff;
 }
 /* USER DASHBOARD */
 .admin{
@@ -572,4 +586,6 @@ input, button, textarea {
     justify-content: center;
     align-items: center;
 }
+
+
 

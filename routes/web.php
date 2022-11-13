@@ -58,6 +58,12 @@ Route::middleware('auth')->group(function () {
 Route::get('community', [CommunityController::class, 'create'])
                 ->name('community');
 
+Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+->name('addCommunity');
+
+Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+->name('removeCommunity');
+
 Route::post('community', [CommunityController::class, 'store']);
 
 Route::get('/community-list', [CommunityController::class, 'index'])->name('community-list');
@@ -67,7 +73,7 @@ Route::post('community/{community}/add', [CommunityController::class, 'addCommun
 
 Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
                 ->name('removeCommunity');
-
+                
 Route::get('update-user', [UserController:: class, 'create'])
                 ->name('update-user');
 
@@ -110,6 +116,7 @@ Route::get('request-community', [ReportController:: class, 'getRequestCommunity'
 Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
 });
 
+// Admin routes
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
     Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
@@ -147,7 +154,7 @@ Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
 Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
 
-Route::post('/report/{userId}', [HomeController::class, 'reportUser']);
+Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
 
