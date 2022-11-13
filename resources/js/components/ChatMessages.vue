@@ -27,13 +27,13 @@
 
 <style scoped>
 .chat-box {
-	background-color: #FFF;
+    background-color: #fff;
     flex: 1 1 100%;
     padding: 30px 30px 0px 30px;
 }
 .message-content {
     display: flex;
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 .username {
     color: #888;
@@ -45,14 +45,13 @@
 .message-content {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
     border-radius: 999px;
     color: #333;
     font-size: 18px;
     line-height: 1.2em;
     text-align: left;
 }
-
 </style>
 
 <script>
