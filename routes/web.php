@@ -34,6 +34,10 @@ Route::get('/report-form', function () {
     return view('report-form');
 });
 
+Route::get('/UsersList', function () {
+    return view('UsersList');
+});
+
 Route::get('/subscription', function () {
     return view('subscription');
 })->name('subscription');
@@ -144,7 +148,7 @@ Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
-Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
+Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
 Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
