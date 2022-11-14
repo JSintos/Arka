@@ -2,7 +2,7 @@
 @include('layouts.admin-nav')
 @section('content')
 @section('title','ARKA-Admin') 
-<body class="antialiased">
+<div class="antialiased">
 
     <div id="linechart" style="width: 1000px; height: 500px"></div>
 
@@ -37,6 +37,6 @@
             chart.draw(data, options);
         }        
     </script>
-</body>
+</div>
 
  @endsection
