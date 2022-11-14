@@ -34,6 +34,10 @@ Route::get('/report-form', function () {
     return view('report-form');
 });
 
+Route::get('/UsersList', function () {
+    return view('UsersList');
+});
+
 Route::get('/subscription', function () {
     return view('subscription');
 })->name('subscription');
