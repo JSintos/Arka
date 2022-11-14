@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Feedback;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
@@ -26,22 +26,7 @@ class FeedbackController extends Controller
      */
     public function create()
     {
-
-        $valid = false;
-
-        $date = Auth::user()->created_at;
-        $now = Carbon::now();
-
-        $testdate = $date->diffInDays($now);
- 
-        if($testdate >= 30  &&  $now->dayOfWeek === Carbon::THURSDAY)
-        {
-            $valid = true;
-        }
-
-
-
-        return view('practice')->with(array('valid' => $valid));
+        //
     }
 
     /**z
@@ -52,21 +37,7 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'monthlyFeedback' => 'required',
-        ]);
-
-        $userId = Auth::id();
-        $current = Carbon::now();
-
-        Feedback::create([
-            'userId' => $userId,
-            'dateFeedbackAnswered' => $current,
-            'type' => 1,
-            'firstQuestionRating' => $request->monthlyFeedback,
-        ]);
-        return redirect('/practice')->with('success', 'Data saved');
-
+        //
     }
 
     /**
@@ -113,29 +84,4 @@ class FeedbackController extends Controller
     {
         //
     }
-
-    public function showMonthlyFeedback()
-    {
-        return view('monthly-feedback');
-    }
-
-    public function monthlyFeedback(Request $request)
-    {
-        $request->validate([
-            'monthlyFeedback' => 'required',
-        ]);
-
-        $userId = Auth::id();
-        $current = Carbon::now();
-
-        Feedback::create([
-            'userId' => $userId,
-            'dateFeedbackAnswered' => $current,
-            'type' => 1,
-            'firstQuestionRating' => $request->monthlyFeedback,
-        ]);
-
-        return redirect('/dashboard');
-    }
-
 }

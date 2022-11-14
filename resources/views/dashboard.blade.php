@@ -3,6 +3,8 @@
 @section('content')
 @section('title','ARKA')
 
+<meta name="valid" content="{{ $valid }}">
+
 <div class="admin">
     <div class="container mt-5 mb-5">
         <div>
@@ -41,9 +43,56 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('storeMonthlyFeedback') }}">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Monthly academic performance check!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <h3 style="text-align: center;">Rate your academic performance for the previous month</h3>
+                    <p>
+                    <div class="rating" id="monthlyFeedback" name="monthlyFeedback">
+                        <div class="star-icon">
+                            <input type="radio" value="1" name="rating" checked id="rating1" >
+                            <label for="rating1" class="fa fa-star"></label>
+                            <input type="radio" value="2" name="rating" id="rating2">
+                            <label for="rating2" class="fa fa-star"></label>
+                            <input type="radio" value="3" name="rating" id="rating3">
+                            <label for="rating3" class="fa fa-star"></label>
+                            <input type="radio" value="4" name="rating" id="rating4">
+                            <label for="rating4" class="fa fa-star"></label>
+                            <input type="radio" value="5" name="rating" id="rating5">
+                            <label for="rating5" class="fa fa-star"></label>
+                        </div>
+                    </div>
 
-<!-- Start of ChatBot (www.chatbot.com) code -->
-<script type="text/javascript">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+    var valid = $('meta[name="valid"]').attr('content');
+
+    $(document).ready(function(){
+        console.log("asd");
+        if(valid){
+            $('#exampleModal').modal('show');
+        }
+    });
+
+    // Start of ChatBot (www.chatbot.com) code
     window.__be = window.__be || {};
     window.__be.id = "637091ec6fd6ba0007db3b6f";
     (function() {
@@ -52,7 +101,6 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
     })();
 </script>
-<!-- End of ChatBot code -->
 
 
 
