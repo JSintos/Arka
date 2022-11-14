@@ -81,6 +81,22 @@ const app = new Vue({
                 // console.log(response.data);
             });
         },
+        firstBadge(data) {
+            axios.post(`/commend/1/${data.userId}`).then((response) => {
+                console.log(response.data);
+            });
+        },
+        secondBadge(data) {
+            axios.post(`/commend/2/${data.userId}`).then((response) => {});
+        },
+        thirdBadge(data) {
+            axios.post(`/commend/3/${data.userId}`).then((response) => {});
+        },
+        reportUser(data) {
+            console.log(data);
+
+            // axios.post(`/report/${data.userId}`, data).then((response) => {});
+        },
         // fetchChatMessages() {
         //     //GET request to the messages route in our Laravel server to fetch all the messages
         //     axios.get("/chatmessages").then((response) => {
@@ -89,19 +105,19 @@ const app = new Vue({
         //     });
         // },
         //Receives the message that was emitted from the ChatForm Vue component
-        addChatMessage(message) {
-            //Pushes it to the messages array
-            this.chatmessages.push(message.message);
+        // addChatMessage(message) {
+        //     //Pushes it to the messages array
+        //     this.chatmessages.push(message.message);
 
-            //POST request to the messages route with the message data in order for our Laravel server to broadcast it.
-            axios
-                .post("/chatmessages", {
-                    message: message.message,
-                    communityId: message.commId,
-                })
-                .then((response) => {
-                    // console.log(response.data);
-                });
-        },
+        //     //POST request to the messages route with the message data in order for our Laravel server to broadcast it.
+        //     axios
+        //         .post("/chatmessages", {
+        //             message: message.message,
+        //             communityId: message.commId,
+        //         })
+        //         .then((response) => {
+        //             // console.log(response.data);
+        //         });
+        // },
     },
 });
