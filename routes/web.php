@@ -83,15 +83,8 @@ Route::get('change-password', [UserController::class, 'showChangePassword'])
 
 Route::post('change-password', [UserController::class, 'changePassword']);
 
-Route:: get('monthly-feedback', [FeedbackController:: class, 'showMonthlyFeedback'])
-                ->name('monthly-feedback');
-
-Route:: post('monthly-feedback', [FeedbackController:: class, 'monthlyFeedback']);
-
-Route:: get('practice', [FeedbackController:: class, 'create'])
-                ->name('practice');
-
-Route:: post('practice', [FeedbackController:: class, 'store']);
+Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
+                ->middleware(['auth'])->name('storeMonthlyFeedback');
 
 Route:: get('subscription', [SubscriptionController:: class, 'create'])
                 ->name('subscription');
