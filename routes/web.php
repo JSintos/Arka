@@ -144,7 +144,7 @@ Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 
 Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
-Route::post('/commend/{badgeNumber}/{userId}', [HomeController::class, 'commendUser']);
+Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
 Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
