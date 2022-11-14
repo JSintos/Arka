@@ -2,58 +2,41 @@
 @include('layouts.admin-nav')
 @section('content')
 @section('title','ARKA-Admin') 
-<div class="container p-5">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Monthly Feedbacks</button>
-        <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Room Feedbacks</button>
-    </nav>
-    @if($message = Session::get('success'))
-            <div class="alert alert-success">
-              <p>{{ $message }}</p>
-            </div>
-          @endif
+<body class="antialiased">
 
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-          <table class="table table-hover ">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-          @foreach ($monthlyFeedbacks as $monthlyFeedback)
-            <tr>
-              <td>{{ $monthlyFeedback->dateFeedbackAnswered }}</td>
-              <td>{{ $monthlyFeedback->firstQuestionRating }}</td>   
-            </tr>
-            @endforeach
-          </table>
-        </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <table class="table table-bordered">
-          <thead>
-              <tr>
-                <th>Date</th>
-                <th>1st Question Rating</th>
-                <th>2nd Question Rating</th>
-                <th>3rd Question Rating</th>
-                <th>4th Question Rating</th>
-              </tr>
-          </thead>
-          @foreach ($roomFeedbacks as $roomFeedback)
-            <tr>
-              <td>{{ $roomFeedback->dateFeedbackAnswered }}</td>
-              <td>{{ $roomFeedback->firstQuestionRating }}</td>
-              <td>{{ $verifiedSub->secondQuestionRating }}</td>
-              <td>{{ $verifiedSub->thirdQuestionRating }}</td>
-              <td>{{ $verifiedSub->fourthQuestionRating }}</td>
-            </tr>
-            @endforeach
-          </table>
-        </div>
-      </div>
-</div>
+    <div id="linechart" style="width: 1000px; height: 500px"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        var feedbacks = <?php echo $feedbacks; ?>;
+        console.log(feedbacks);
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(lineChart);
+        function lineChart() {
+            var data = google.visualization.arrayToDataTable(feedbacks);
+            var options = {
+                title: 'Average Rating in Monthly Feedbacks',
+                curveType: 'function',
+                legend: {
+                    position: 'bottom'
+                },
+                vAxis: {
+                  title : 'Rating',
+                  gridlines: {count: 7},
+                  ticks: [0, 1,2,3,4,5, 6]
+                },
+                hAxis: {
+                  title: 'Month',
+                  gridlines: {count: 12},
+                  ticks: [1,2,3,4,5,6,7,8,9,10,11,12]
+                }
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+            chart.draw(data, options);
+        }        
+    </script>
+</body>
 
  @endsection

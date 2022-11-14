@@ -130,27 +130,22 @@ class AdminController extends Controller
 
     public function indexFeedback()
     {
-        // $roomFeedbacks = Feedback::where('type', 0)->get();
-        // $monthlyFeedbacks = Feedback::where('type', 1)->get();
 
-        // return view('admin-panel-feedbacks', compact('roomFeedbacks', 'monthlyFeedbacks'));
+        $feedbacks = Feedback::select(
+                        DB::raw("MONTH(created_at) as month"),
+                        DB::raw("AVG(firstQuestionRating) as average"))
+                    ->where("type", "=", "1")
+                    ->orderBy(DB::raw("MONTH(created_at)"))
+                    ->groupBy(DB::raw("MONTH(created_at)"))
+                    ->get();
+        
+        $res[] = ['month', 'average'];
 
-        // $current_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
-        // ->whereMonth('created_at', Carbon::now()->month)->count();
-        // $before_1_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
-        // ->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
-        // $before_2_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
-        // ->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
-        // $before_3_month_feedbacks = Feedback::whereYear('created_at', Carbon::now()->year)
-        // ->whereMonth('created_at', Carbon::now()->subMonth(3))->count();
-        // $feedbacksCount = array($current_month_feedbacks, $before_1_month_feedbacks, 
-        // $before_2_month_feedbacks, $before_3_month_feedbacks);
-
-        // return view('admin-panel-feedbacks')->with(compact('feedbacksCount'));
-
-        $feedbacks = Feedback::all();
-        return view('admin-panel-feedbacks', ['feedbacks' => $feedbacks]);
-
+       
+        foreach($feedbacks as $key => $val){
+            $res[++$key] = [$val->month, (double)$val->average];
+        }
+        return view('admin-panel-feedbacks')->with('feedbacks', json_encode($res));
 
     }
 

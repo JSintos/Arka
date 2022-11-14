@@ -2,6 +2,7 @@
 @include('layouts.admin-nav')
 @section('content')
 @section('title','ARKA-Admin')
+
 <div class="container p-5">
     <div class="pull-left">
         <h2>Arka Community List</h2>
