@@ -28,6 +28,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "bad-words": "^3.0.4",
         "laravel-echo": "^1.14.1",
         "pusher-js": "^7.4.0"
     }

@@ -7,7 +7,7 @@
             id="btn-input"
             type="text"
             name="message"
-            class="form-control  input-field"
+            class="form-control input-field"
             placeholder="Type your message here..."
             v-model="newMessage"
             @keyup.enter="sendMessage"
@@ -16,7 +16,7 @@
         <span class="input-group-btn">
             <!-- Call sendMessage() this button is clicked. -->
             <button
-            class="form-control send-btn"
+                class="form-control send-btn"
                 id="btn-chat"
                 @click="sendMessage"
             >
@@ -27,7 +27,7 @@
 </template>
 
 <style scoped>
-.input-field{
+.input-field {
     appearance: none;
     border: none;
     outline: none;
@@ -40,7 +40,7 @@
     color: #333;
     font-size: 18px;
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
     transition: 0.4s;
 }
 .send-btn {
@@ -51,8 +51,8 @@
     display: inline-block;
     padding: 10px 15px;
     border-radius: 0px 8px 8px 0px;
-    background-color: #90CCF4;
-    color: #FFF;
+    background-color: #90ccf4;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
 }
@@ -69,11 +69,15 @@ export default {
     },
     methods: {
         sendMessage() {
+            let filter = new Filter();
+
+            let cleanedMessage = filter.clean(this.newMessage);
+
             //Emit a "messagesent" event including the user who sent the message along with the message content
             this.$emit("messagesent", {
+                user: this.user,
                 //newMessage is bound to the earlier "btn-input" input field
-                message: this.newMessage,
-                commId: this.communityId,
+                message: cleanedMessage,
             });
             //Clear the input
             this.newMessage = "";

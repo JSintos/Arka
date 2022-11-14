@@ -26,34 +26,8 @@ class HomeController extends Controller
             }
         }
 
-        return view('dashboard')->with(array('communities' => $resultingArray));
-    }
+        $subscription = DB::table('subscriptions')->where('userId', $user->userId)->first();
 
-    public function commendUser($badgeNumber, $userId){
-        error_log("badge number: " . $badgeNumber);
-        error_log("userid: " . $userId);
-
-        $user = DB::table('users')->where('userId', $userId)->first();
-
-        $decodedArray = json_decode($user->badgeList, true);
-
-        // dd($decodedArray);
-        // dd($decodedArray["badgeOne"]);
-
-        switch($badgeNumber){
-            case 1: $decodedArray["badgeOne"] = $decodedArray["badgeOne"] + 1;
-                    break;
-            case 2: $decodedArray["badgeTwo"] = $decodedArray["badgeTwo"] + 1;
-                    break;
-            case 3: $decodedArray["badgeThree"] = $decodedArray["badgeThree"] + 1;
-        }
-
-        DB::table('users')->where('userId', $userId)->update(["badgeList" => json_encode($decodedArray)]);
-
-        return ['status' => 'Message Sent!'];
-    }
-
-    public function reportUser(Request $request, $userId){
-
+        return view('dashboard')->with(array('communities' => $resultingArray, 'isSubscribed' => isset($subscription)));
     }
 }

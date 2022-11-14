@@ -1,52 +1,62 @@
 <template>
-    <ul class="chat">
-        <li class="left clearfix" v-for="message in messages" :key="message.id">
-            <div class="clearfix">
-                <div class="header">
-                    <strong>
-                        {{ message.user.username }}
-                        <span v-if="message.user_userId !== user.userId">
-                            <button
-                                type="button"
-                                class="btn btn-success"
-                                @click="firstBadge(message.user.userId)"
-                            >
-                                badge # 1
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-warning"
-                                @click="secondBadge(message.user.userId)"
-                            >
-                                badge # 2
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-info"
-                                @click="thirdBadge(message.user.userId)"
-                            >
-                                badge # 3
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-danger"
-                                @click="reportUser(message.user.userId)"
-                            >
-                                report
-                            </button>
-                        </span>
-                    </strong>
-                </div>
-                <p>
-                    {{ message.message }}
-                </p>
-            </div>
-        </li>
-    </ul>
     <div class="chat-box">
-        <div class="message" v-for="message in messages" :key="message.id" >
+        <div class="message" v-for="message in messages" :key="message.id">
             <div class="message-inner">
-                <div class="username">{{ message.user.username }}</div>
+                <div class="username">
+                    {{ message.user.username }}
+                    <span v-if="message.user_userId !== user.userId">
+                        <div class="btn-group">
+                            <button
+                                type="button"
+                                class="btn btn-sm dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                More
+                            </button>
+                            <ul class="dropdown-menu dropdown-item-padding-y">
+                                <p class="ml-4">Badges:</p>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="firstBadge(message.user.userId)"
+                                        ><i class="fa-solid fa-heart mr-2"></i
+                                        >Empath</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="
+                                            secondBadge(message.user.userId)
+                                        "
+                                        ><i class="fa-solid fa-brain mr-2"></i
+                                        >Genius</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="dropdown-item"
+                                        @click="thirdBadge(message.user.userId)"
+                                        ><i class="fa-solid fa-hand mr-2"></i
+                                        >Kind</a
+                                    >
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li class="p-2">
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                        @click="reportUser(message.user.userId)"
+                                    >
+                                        <i class="fa-solid fa-flag mr-2"></i
+                                        >report
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                </div>
                 <div class="message-content">{{ message.message }}</div>
             </div>
         </div>
@@ -55,13 +65,13 @@
 
 <style scoped>
 .chat-box {
-	background-color: #FFF;
+    background-color: #fff;
     flex: 1 1 100%;
     padding: 30px 30px 0px 30px;
 }
 .message-content {
     display: flex;
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 .username {
     color: #888;
@@ -73,14 +83,13 @@
 .message-content {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
     border-radius: 999px;
     color: #333;
     font-size: 18px;
     line-height: 1.2em;
     text-align: left;
 }
-
 </style>
 
 <script>
