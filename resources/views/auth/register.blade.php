@@ -3,6 +3,7 @@
 @section('title','ARKA-Sign Up')
 
 <body class="blue">
+
     <section class="flex-column min-vh-80 justify-content-center align-items-center mt-5 p-5">
         <div class="container">
             <div class="row"> 
@@ -39,19 +40,28 @@
                                 <div class="mb-3 row">
                                     <x-label for="password" :value="__('Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                    <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
-                                </div>
+                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
+                                    </div>
                                 </div>
 
                                 <!-- Confirm Password -->
                                 <div class="mb-3 row">
                                     <x-label for="password_confirmation" :value="__('Confirm Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                    <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
+                                        <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
+                                    </div>
                                 </div>
+                                <div class="row flex">
+                                        <div class="col-sm-3">
+                                            <span>{!! captcha_img() !!}</span>
+                                        </div>
+                                        <div class="col-sm-9 align-item-left">
+                                            <x-input id="captcha" class="form-control" placeholder="Enter the captcha text.." type="text" name="captcha" required />
+                                        </div>
                                 </div>
-                                <!-- Terms and Condition -->
-                                <div class="col-12">
+                                
+                                  <!-- Terms and Condition -->
+                                <div class="col-12 mt-5">
                                     <div class="form-check form-check-text">
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">
@@ -76,9 +86,20 @@
             </div>
         </div>
     </section>
+<script type="text/javascript">
+    $('#reload').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'reload-captcha',
+            success: function (data) {
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
 @endsection
 
 
-      
+
 
 

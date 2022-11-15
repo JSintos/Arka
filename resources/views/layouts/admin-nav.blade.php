@@ -7,9 +7,10 @@
                 </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                  <a class="nav-link" href="/home">Home</a>
                   <a class="nav-link" href="subscriptions">Subscriptions</a>
                   <a class="nav-link" href="community">Communities<span class="sr-only">(current)</span></a>
-                  <a class="nav-link" href="#">Reports</a>
+                  <a class="nav-link" href="reports">Reports</a>
                   <a class="nav-link" href="feedbacks">Feedback</a>
                   <a class="nav-link" href="#">Badges Leaderboard</a>
                 </div>

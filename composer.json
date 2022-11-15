@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "*",
+        "mews/captcha": "*",
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {

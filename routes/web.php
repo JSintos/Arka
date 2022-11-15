@@ -94,9 +94,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
-    Route::get('proxy-subscription', [SubscriptionController:: class, 'create'])
-                    ->name('proxy-subscription');
-
     Route::get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                     ->name('gcash-payment');
 
@@ -106,7 +103,7 @@ Route::middleware('auth')->group(function () {
                     ->name('request-community');
 
     Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
-
+    
     Route::get('/chat', [ChatsController::class, 'index']);
 
     Route::get('/messages', [ChatsController::class, 'fetchMessages']);
@@ -143,6 +140,10 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
                 ->name('admin/community/{community}/edit');
 
     Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
+
+    Route::get('admin/reports', [AdminController:: class, 'getReports'])->name('admin/reports');
+
+    Route::post('admin/reports', [AdminController:: class, 'resolvedReports']);
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
 });
