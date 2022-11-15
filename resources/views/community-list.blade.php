@@ -28,6 +28,11 @@
     <div class="mt-5 mb-3">
         <h4>Your community list</h4>
     </div>
+    
+    <div class="pull-right mb-2">
+        <a class="add-btn" href="{{ route('request-community') }}"><i class="fa-solid fa-comment-plus mr-2"></i>Petition New Community</a>
+    </div>
+   
         <table class="table table-bordered second-table">
                 <tr>
                     <th>Community Name</th>

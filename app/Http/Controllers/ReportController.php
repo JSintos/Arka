@@ -129,7 +129,7 @@ class ReportController extends Controller
                     'resolutionStatus' => 0
                 ]);
         
-                return redirect('/dashboard')->with("success","Community petition requested successfully!");
+                return redirect('/request-community')->with("success","Community petition requested successfully!");
 
             }
         
