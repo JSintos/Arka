@@ -64,7 +64,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('community', [CommunityController::class, 'store']);
 
-    Route::get('/community-list', [CommunityController::class, 'index'])->name('community-list');
+    Route::get('/community-list', [CommunityController::class, 'index'])
+                    ->name('community-list');
 
     Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
                     ->name('addCommunity');
@@ -85,26 +86,35 @@ Route::middleware('auth')->group(function () {
     Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
                     ->middleware(['auth'])->name('storeMonthlyFeedback');
 
-    Route:: get('subscription', [SubscriptionController:: class, 'create'])
+    Route::get('subscription', [SubscriptionController:: class, 'create'])
                     ->name('subscription');
 
-    Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
+    Route::get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
                     ->name('organizational-subscription');
 
-    Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
+    Route::post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
-    Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
-                    ->name('proxy-subscription');
-
-    Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
+    Route::get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
                     ->name('gcash-payment');
 
-    Route:: post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
+    Route::post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
     Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
                     ->name('request-community');
 
     Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
+    
+    Route::get('/chat', [ChatsController::class, 'index']);
+
+    Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+
+    Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
+    Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
+
+    Route::get('/report/{userId}', [ChatsController::class, 'reportUser']);
+
+    Route::post('/report/{userId}', [ChatsController::class, 'sendReport']);
 });
 
 // Admin routes
@@ -137,16 +147,6 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
 });
-
-Route::get('/chat', [ChatsController::class, 'index']);
-
-Route::get('/messages', [ChatsController::class, 'fetchMessages']);
-
-Route::post('/messages', [ChatsController::class, 'sendMessage']);
-
-Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
-
-Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
 
