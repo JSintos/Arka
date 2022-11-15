@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         if(captcha_check($request->captcha) == false) {
-            return back()->with('error', 'incorrect captcha!');
+            return back()->with('success', 'Incorrect captcha!');
         }
         else{
 
