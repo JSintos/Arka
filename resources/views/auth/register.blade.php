@@ -3,6 +3,7 @@
 @section('title','ARKA-Sign Up')
 
 <body class="blue">
+
     <section class="flex-column min-vh-80 justify-content-center align-items-center mt-5 p-5">
         <div class="container">
             <div class="row"> 
@@ -49,6 +50,18 @@
                                     <div class="col-sm-10">
                                     <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
                                 </div>
+                                <div class="mb-3 row">
+                                    <div class="captcha">
+                                        <span>{!! captcha_img() !!}</span>
+                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
+                                            &#x21bb;
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-4">
+                                        <x-input id="captcha" class="form-control" type="text" name="captcha" required />
+                                    </div>
                                 </div>
                                 <!-- Terms and Condition -->
                                 <div class="col-12">
@@ -76,9 +89,20 @@
             </div>
         </div>
     </section>
+<script type="text/javascript">
+    $('#reload').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'reload-captcha',
+            success: function (data) {
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
 @endsection
 
 
-      
+
 
 
