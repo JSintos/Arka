@@ -17,6 +17,10 @@
                         <div class="col-md-6">
                             <div class="m-3 p-2"><h2>Sign Up for an Account</h2><p>Create an account to join our different communities</p></div>
                             <!-- Validation Errors -->
+                            @if($message = Session::get('success'))
+                            <div class="alert alert-danger">
+                                <p>{{$message}}</p>
+                            </div>
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
                             <form method="POST" action="{{ route('register') }}" class="m-3">
                                 @csrf

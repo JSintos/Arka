@@ -62,3 +62,15 @@
     color: #fff;
     background-color: #90CCF4;
 }
+.action{
+    width: 50%;
+    height: 38px;
+    display: inline-block; 
+    box-shadow: 0px 0px 0px rgba(219, 219, 219, 0);
+    border-radius: 8px 8px 8px 8px;
+}
+.button{
+    display: flex;
+    font-family: "Raleway", sans-serif;
+    text-decoration: none;
+}

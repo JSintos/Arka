@@ -9,13 +9,13 @@
         <button class="nav-link" id="nav-resolved-tab" data-toggle="tab" data-target="#nav-resolved" type="button" role="tab" aria-controls="nav-resolved" aria-selected="false">Resolved Reports</button>
     </nav>
     @if($message = Session::get('success'))
-            <div class="alert alert-danger">
+            <div class="alert alert-success">
               <p>{{ $message }}</p>
             </div>
     @endif
     <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-unresolved" role="tabpanel" aria-labelledby="nav-unresolved-tab">
-            <table class="table table-hover table-striped-columns ">
+            <table class="table table-striped-columns ">
               <thead>
                 <tr>
                   <th>User</th>
@@ -39,17 +39,23 @@
                 @endforeach
                 <td>
                   <form action="{{ route('admin/reports/ban') }}" method="POST">
-                        @csrf
-                        <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
-                        <input type="hidden" id ="reportedUserId" name="reportedUserId" value="{{ $unresolved->reportedUserId }}" required>
-                        <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-ban mr-2"></i>Ban</button>
+                    @csrf
+                    <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
+                    <input type="hidden" id ="reportedUserId" name="reportedUserId" value="{{ $unresolved->reportedUserId }}" required>
+                    <div class="button">
+                      <button type="submit" class="action"><i class="fa-solid fa-ban mr-2"></i>Ban</button>
+                    </div>
                   </form>
-                  <form action="{{ route('admin/reports') }}" method="POST">
-                        @csrf
-                        <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
-                        <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-trash mr-2"></i>Delete</button>
+                 <form action="{{ route('admin/reports') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
+                    <div class="button">
+                      <button type="submit" class="action"><i class="fa-solid fa-trash mr-2"></i>Delete</button>
+                    </div>
                   </form>
-                </td>            
+                    
+                  </td> 
+                </div>           
               </tr>
               @endforeach
             </table>
