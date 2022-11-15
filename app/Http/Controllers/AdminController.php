@@ -128,6 +128,25 @@ class AdminController extends Controller
         
     }
 
+    public function getReports()
+    {
+        $unresolvedReports = Report::where('status', 0)->get();
+        $resolvedReports = Report::where('status', 1)->get();
+        return view('admin-panel-reports', compact('unresolvedReports', 'resolvedReports'));
+    }
+    public function resolvedReports(Request $request)
+    {
+        $now = Carbon::now();
+        $month = Carbon::now()->addMonth();
+        $id = $request['reportId'];
+       
+        $unresolvedReports = Report::find($id); 
+        $unresolvedReports->status = 1;
+        $unresolvedReports->save();
+
+        return back()->with('success','Action done successfully!');
+    }
+
     public function indexFeedback()
     {
 

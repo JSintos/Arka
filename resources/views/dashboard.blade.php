@@ -91,8 +91,7 @@
             $('#exampleModal').modal('show');
         }
     });
-
-    // Start of ChatBot (www.chatbot.com) code
+    
     window.__be = window.__be || {};
     window.__be.id = "637091ec6fd6ba0007db3b6f";
     (function() {
@@ -101,6 +100,8 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
     })();
 </script>
+
+
 
 
 
