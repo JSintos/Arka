@@ -35,6 +35,12 @@ class AuthenticatedSessionController extends Controller
         $user = auth()->user();
         // dd($user);
 
+        if($user->userType == 2)
+        {
+            $request->session()->invalidate();
+            return redirect('login')->with('success', 'Your account is banned!');
+        }
+
         if($user->communityList == null)
         {
             return redirect('/community');

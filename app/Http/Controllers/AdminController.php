@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subscription;
+use App\Models\User;
 use App\Models\Community;
 use App\Models\Feedback;
 use App\Models\Report;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Chart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -132,21 +134,41 @@ class AdminController extends Controller
     {
         $unresolvedReports = Report::where('status', 0)->get();
         $resolvedReports = Report::where('status', 1)->get();
-        return view('admin-panel-reports', compact('unresolvedReports', 'resolvedReports'));
+        $users = User::all();
+        return view('admin-panel-reports', compact('unresolvedReports', 'resolvedReports','users'));
     }
-    public function resolvedReports(Request $request)
+    public function resolveReport(Request $request)
     {
-        $now = Carbon::now();
-        $month = Carbon::now()->addMonth();
         $id = $request['reportId'];
+        $user = Auth::user();
        
-        $unresolvedReports = Report::find($id); 
-        $unresolvedReports->status = 1;
-        $unresolvedReports->save();
+        $unresolved = Report::find($id); 
+        $unresolved->status = 1;
+        $unresolved->resolutionStatus = 0;
+        $unresolved->resolvedBy = $user->userId;
+        $unresolved->save();
 
-        return back()->with('success','Action done successfully!');
+        return back()->with('success','Report acknowledged successfully!');
     }
 
+    public function reportBanUser(Request $request)
+    {
+        $id = $request['reportId'];
+        $user = Auth::user();
+
+        $unresolved = Report::find($id);
+        $unresolved->status = 1;
+        $unresolved->resolutionStatus = 1;
+        $unresolved->resolvedBy = $user->userId;
+        $unresolved->save();
+
+        $bannedId = $request['reportedUserId'];
+        $ban = User::find($bannedId);
+        $ban->userType = 2;
+        $ban->save();
+
+        return back()->with('success','User banned successfully!');
+    }
     public function indexFeedback()
     {
 

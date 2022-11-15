@@ -133,7 +133,9 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::get('admin/reports', [AdminController:: class, 'getReports'])->name('admin/reports');
 
-    Route::post('admin/reports', [AdminController:: class, 'resolvedReports']);
+    Route::post('admin/reports', [AdminController:: class, 'resolveReport']);
+
+    Route::post('admin/reports/ban', [AdminController:: class, 'reportBanUser'])->name('admin/reports/ban');
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
 });

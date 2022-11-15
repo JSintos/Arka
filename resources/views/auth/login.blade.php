@@ -11,6 +11,11 @@
                         <div class="m-3 p-2">
                             <h2>Welcome back</h2><p>Login to continue using Arka</p>
                         </div>
+                        @if($message = Session::get('success'))
+                                <div class="alert alert-danger">
+                                <p>{{ $message }}</p>
+                                </div>
+                        @endif
                         <!-- Session Status -->
                             <x-auth-session-status class="mb-4" :status="session('status')" />
                         <!-- Validation Errors -->
