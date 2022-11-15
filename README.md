@@ -1,5 +1,7 @@
 <h1 align="center">
     Arka
+    <br><br>
+    <img alt="Arka logo" height="250" src="https://github.com/JSintos/Arka/blob/develop/ProjectIcon.png?raw=true">
 </h1>
 
 ## Installation
@@ -38,12 +40,18 @@ php artisan key:generate
 
 6. Create an empty database for the project and name it `arka`.
 
-7. Edit the value `laravel` on the property `DB_DATABASE` to `arka` in your `.env` file.
+7. Edit the Pusher properties (PUSHER_APP_ID, PUSHER_APP_KEY, PUSHER_APP_SECRET) in your `.env` file. Get the values from [Joshy](https://github.com/JSintos).
 
 8. Run the database migrations.
 
 ```
 php artisan migrate
+```
+
+9. Manifest the custom captcha configuration.
+
+```
+php artisan vendor:publish
 ```
 
 ## Contributors

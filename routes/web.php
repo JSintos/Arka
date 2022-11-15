@@ -30,10 +30,6 @@ Route::get('/contact-sales', function () {
     return view('contact-sales');
 })->name('contact-sales');
 
-Route::get('/report-form', function () {
-    return view('report-form');
-});
-
 Route::get('/UsersList', function () {
     return view('UsersList');
 });
@@ -103,7 +99,7 @@ Route::middleware('auth')->group(function () {
                     ->name('request-community');
 
     Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
-    
+
     Route::get('/chat', [ChatsController::class, 'index']);
 
     Route::get('/messages', [ChatsController::class, 'fetchMessages']);
@@ -112,9 +108,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
-    Route::get('/report/{userId}', [ChatsController::class, 'reportUser']);
+    Route::get('/report/{userId}/', [ChatsController::class, 'reportUser']);
 
-    Route::post('/report/{userId}', [ChatsController::class, 'sendReport']);
+    Route::post('/report/{userId}/', [ChatsController::class, 'sendReport']);
 });
 
 // Admin routes
