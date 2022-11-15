@@ -53,59 +53,71 @@ Route::get('/terms-and-condition', function () {
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('community', [CommunityController::class, 'create'])
+                    ->name('community');
 
-Route::get('community', [CommunityController::class, 'create'])
-                ->name('community');
+    Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+                    ->name('addCommunity');
 
-Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
-->name('addCommunity');
+    Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+                    ->name('removeCommunity');
 
-Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
-->name('removeCommunity');
+    Route::post('community', [CommunityController::class, 'store']);
 
-Route::post('community', [CommunityController::class, 'store']);
+    Route::get('/community-list', [CommunityController::class, 'index'])
+                    ->name('community-list');
 
-Route::get('/community-list', [CommunityController::class, 'index'])->name('community-list');
+    Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+                    ->name('addCommunity');
 
-Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
-                ->name('addCommunity');
+    Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+                    ->name('removeCommunity');
 
-Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
-                ->name('removeCommunity');
+    Route::get('update-user', [UserController:: class, 'create'])
+                    ->name('update-user');
 
-Route::get('update-user', [UserController:: class, 'create'])
-                ->name('update-user');
+    Route::post('update-user', [UserController:: class, 'profileUpdate']);
 
-Route::post('update-user', [UserController:: class, 'profileUpdate']);
+    Route::get('change-password', [UserController::class, 'showChangePassword'])
+                    ->name('change-password');
 
-Route::get('change-password', [UserController::class, 'showChangePassword'])
-                ->name('change-password');
+    Route::post('change-password', [UserController::class, 'changePassword']);
 
-Route::post('change-password', [UserController::class, 'changePassword']);
+    Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
+                    ->middleware(['auth'])->name('storeMonthlyFeedback');
 
-Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
-                ->middleware(['auth'])->name('storeMonthlyFeedback');
+    Route::get('subscription', [SubscriptionController:: class, 'create'])
+                    ->name('subscription');
 
-Route:: get('subscription', [SubscriptionController:: class, 'create'])
-                ->name('subscription');
+    Route::get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
+                    ->name('organizational-subscription');
 
-Route:: get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
-                ->name('organizational-subscription');
+    Route::post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
-Route:: post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
+    Route::get('proxy-subscription', [SubscriptionController:: class, 'create'])
+                    ->name('proxy-subscription');
 
-Route:: get('proxy-subscription', [SubscriptionController:: class, 'create'])
-                ->name('proxy-subscription');
+    Route::get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
+                    ->name('gcash-payment');
 
-Route:: get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
-                ->name('gcash-payment');
+    Route::post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
-Route:: post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
+    Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
+                    ->name('request-community');
 
-Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
-                ->name('request-community');
+    Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
 
-Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
+    Route::get('/chat', [ChatsController::class, 'index']);
+
+    Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+
+    Route::post('/messages', [ChatsController::class, 'sendMessage']);
+
+    Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
+
+    Route::get('/report/{userId}', [ChatsController::class, 'reportUser']);
+
+    Route::post('/report/{userId}', [ChatsController::class, 'sendReport']);
 });
 
 // Admin routes
@@ -134,16 +146,6 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
 });
-
-Route::get('/chat', [ChatsController::class, 'index']);
-
-Route::get('/messages', [ChatsController::class, 'fetchMessages']);
-
-Route::post('/messages', [ChatsController::class, 'sendMessage']);
-
-Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
-
-Route::post('/report/{userId}', [ChatsController::class, 'reportUser']);
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
 

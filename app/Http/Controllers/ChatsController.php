@@ -41,9 +41,6 @@ class ChatsController extends Controller
     }
 
     public function commendUser($badgeNumber, $userId){
-        error_log("badge number: " . $badgeNumber);
-        error_log("userid: " . $userId);
-
         $user = DB::table('users')->where('userId', $userId)->first();
 
         $decodedArray = json_decode($user->badgeList, true);
@@ -62,14 +59,26 @@ class ChatsController extends Controller
     }
 
     public function reportUser($reportedUserId, Request $request){
+        $reportedUser = DB::table('users')->where('userId', $reportedUserId)->first();
+
+        if(isset($reportedUser)){
+            return view('report-form')->with(array("reportedUser" => $reportedUser));
+        } else{
+            return redirect('chat');
+        }
+    }
+
+    public function sendReport($reportedUserId, Request $request){
+        $reportedUser = DB::table('users')->where('userId', $reportedUserId)->first();
+
         $userId = Auth::user()->userId;
 
         $newReport = Report::create([
             'userId' => $userId,
-            'reportDescription' => $request->all()["reportDescription"],
+            'reportDescription' => $request->all()["reason"],
             'reportedUserId' => $reportedUserId
         ]);
 
-        return ['status' => 'Your report was succesfully sent.'];
+        return redirect()->back()->with('success', 'You have successfully reported ' . $reportedUser->username);
     }
 }
