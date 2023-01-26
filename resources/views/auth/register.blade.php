@@ -63,14 +63,19 @@
                                         <x-input id="captcha" class="form-control" type="text" name="captcha" required />
                                     </div>
                                 </div>
-                                <!-- Terms and Condition -->
+                                <!-- Terms and Condition//Privacy Policy-->
                                 <div class="col-12">
                                     <div class="form-check form-check-text">
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">
                                         I agree with the <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('terms-and-condition') }}">
-                                        {{ __('Terms & Conditions of Arka.') }}
-                                    </a>
+                                        {{ __('Terms & Conditions') }}
+                                    </a> and
+                                    </label>
+                                    <label class="form-check-label text-sm" for="gridCheck">
+                                       <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('privacy-policy') }}">
+                                        {{ __('Privacy Policy') }}
+                                    </a> of Arka.
                                     </label>
                                     </div>
                                 </div>

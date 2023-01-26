@@ -50,6 +50,10 @@ Route::get('/terms-and-condition', function () {
     return view('terms-and-condition');
 })->name('terms-and-condition');
 
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
