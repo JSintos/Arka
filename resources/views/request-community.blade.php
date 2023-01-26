@@ -1,17 +1,14 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/dashboard">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-  <div class="container">
+@extends('layouts.header')
+@include('layouts.navbar')
+@section('content')
+@section('title','ARKA-Community')
+  <div class="form-container mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="text-align: center;" >Request Community</div>
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h3>Request Community</h3>
                 <p>Please input the name of the community you want to petition with other users.</p>
-                    <div class="container">
+                    <div class="card-text">
                         @if ($errors->any())
                             <div class="mb-4">
                             <ul>
@@ -28,23 +25,21 @@
                             <strong>Success: </strong>{{session()->get('message')}}
                         </div>
                         @endif
-                <div class="card-body">
+                    </div>
                     <form action="{{route('request-community')}}" method="POST">
                     @csrf
                         <div class="mt-4">
-                           <label for="communityName"><strong>Community Name:</strong></label>
-                           <input type="text" class="block mt-1 w-full" id ="requestCommunity" name="requestCommunity" required>
+                           <label for="communityName" class="form-label"><strong>Community Name:</strong></label>
+                           <input type="text" class="form-control" id ="requestCommunity" name="requestCommunity" required>
                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <x-button class="ml-4">
+                       <div class="button mt-4">
+                            <x-button class="secondary-btn">
                                 {{ __('Submit') }}
                             </x-button>
                         </div>
                     </form>
-                
-                </div>
-            </div>
-        </div>
+            </div>   
+        </div>     
+    </div>
 </div>
-</x-auth-card>
-</x-guest-layout>
+@endsection

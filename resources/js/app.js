@@ -99,11 +99,6 @@ const app = new Vue({
                 alert(response.data.status);
             });
         },
-        reportUser(data) {
-            axios.post(`/report/${data.userId}`, data).then((response) => {
-                alert(response.data.status);
-            });
-        },
         // fetchChatMessages() {
         //     //GET request to the messages route in our Laravel server to fetch all the messages
         //     axios.get("/chatmessages").then((response) => {

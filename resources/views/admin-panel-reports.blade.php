@@ -15,28 +15,47 @@
     @endif
     <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-unresolved" role="tabpanel" aria-labelledby="nav-unresolved-tab">
-            <table class="table table-hover table-striped-columns ">
+            <table class="table table-striped-columns ">
               <thead>
                 <tr>
-                  <th>User ID</th>
+                  <th>User</th>
                   <th>Report Description</th>
-                  <th>Reported User ID</th>
+                  <th>Reported User</th>
                   <th>Action</th>
                 </tr>
               </thead>
               @foreach ($unresolvedReports as $unresolved)
               <tr>
-                <td>{{ $unresolved->userId }}</td>
+              @foreach ($users as $user)
+                  @if($unresolved->userId == $user->userId)
+                <td>{{ $user->username }}</td>
+                  @endif
+                @endforeach
                 <td>{{ $unresolved->reportDescription }}</td>
-                <td>{{ $unresolved->reportedUserId }}</td>
+                @foreach ($users as $user)
+                  @if($unresolved->reportedUserId == $user->userId)
+                <td>{{ $user->username }}</td>
+                  @endif
+                @endforeach
                 <td>
-                  <form action="{{ route('admin/reports') }}" method="POST">
-                        @csrf
-                        <input type="hidden" id ="" name="" value="" required>
-                        <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-ban mr-2"></i>Ban</button>
-                        <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-trash mr-2"></i>Delete</button>
-                    </form>
-                </td>            
+                  <form action="{{ route('admin/reports/ban') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
+                    <input type="hidden" id ="reportedUserId" name="reportedUserId" value="{{ $unresolved->reportedUserId }}" required>
+                    <div class="button">
+                      <button type="submit" class="action"><i class="fa-solid fa-ban mr-2"></i>Ban</button>
+                    </div>
+                  </form>
+                 <form action="{{ route('admin/reports') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id ="reportId" name="reportId" value="{{ $unresolved->reportId }}" required>
+                    <div class="button">
+                      <button type="submit" class="action"><i class="fa-solid fa-trash mr-2"></i>Delete</button>
+                    </div>
+                  </form>
+                    
+                  </td> 
+                </div>           
               </tr>
               @endforeach
             </table>
@@ -49,19 +68,34 @@
                 <th>User ID</th>
                 <th>Report Description</th>
                 <th>Reported User ID</th>
-                <th>Status</th>
                 <th>Resolution Status</th>
                 <th>Resolved By</th>
               </tr>
             </thead>
             @foreach ($resolvedReports as $resolved)
             <tr>
-                <td>{{ $resolved->userId }}</td>
+                @foreach ($users as $user)
+                  @if($resolved->userId == $user->userId)
+                <td>{{ $user->username }}</td>
+                  @endif
+                @endforeach
                 <td>{{ $resolved->reportDescription }}</td>
-                <td>{{ $resolved->reportedUserId }}</td>
-                <td>{{ $resolved->status }}</td>
-                <td>{{ $resolved->resolutionStatus }}</td>
-                <td>{{ $resolved->resolvedBy }}</td>
+                @foreach ($users as $user)
+                  @if($resolved->reportedUserId == $user->userId)
+                <td>{{ $user->username }}</td>
+                  @endif
+                @endforeach
+                @if($resolved->resolutionStatus == 0)
+                <td>Acknowledged</td>
+                @endif
+                @if($resolved->resolutionStatus == 1)
+                <td>Banned</td>
+                @endif
+                @foreach ($users as $user)
+                  @if($resolved->resolvedBy == $user->userId)
+                <td>{{ $user->username }}</td>
+                  @endif
+                @endforeach
                 <td></td>
               </tr>
               @endforeach

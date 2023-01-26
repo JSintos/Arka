@@ -1,43 +1,45 @@
 @extends('layouts.header')
 @include('layouts.navbar')
 @section('content')
-@section('title','Report')
+@section('title','ARKA-Report')
 
-<!-- Report Form -->
-<div class="form-container">
-    <form class="form-box">
-        <div>
-            <h3>Please select a problem</h3>
-
-            <p>Your report is anonymous. If someone is in immediate danger, call the local emergency services.</p>
+<div class="form-container mb-5">
+    <div class="row justify-content-center">
+        <div class="mb-3">
+            <a href="/chat"><i class="fa-sharp fa-solid fa-arrow-left mr-2"></i>Go back to chat</a>
         </div>
 
-        <div class="mb-3">
-            <select class="form-select" required aria-label="select example" >
-                <option selected>Choose...</option>
-                <option value="1">Sending threats to users.</option>
-                <option value="2">Sending vulgar and inappropriate messages.</option>
-                <option value="3">Promoting illegal activities.</option>
-                <option value="4">Promoting cheating during group collaborations.</option>
-                <option value="5">Asking or making the users accomplish an academic task.</option>
-                <option value="6">Sending exams/answer sheets from any institution.</option>
-            </select>
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
 
-            <div class="invalid-feedback">Example invalid select feedback</div>
-        </div>
+                <form method="POST" action="/report/{{ $reportedUser->userId }}">
+                    @csrf
+                    <h3>You are reporting {{ $reportedUser->username }}.</h3>
 
-        <div class="mb-3">
-            <label for="reportDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="reportDescription" placeholder="Write a description for your report." required></textarea>
-            <div class="invalid-feedback">
-                Required example textarea.
+                    <p>Your report is anonymous. If someone is in immediate danger, call the local emergency services.</p>
+
+                    <div class="mb-3">
+                        <h5 class="mt-5">Please select a reason:</h5>
+                        <select class="form-select" required aria-label="select example" name="reason">
+                            <option value="Sending threats to users">Sending threats to users.</option>
+                            <option value="Sending vulgar and inappropriate messages">Sending vulgar and inappropriate messages.</option>
+                            <option value="Promoting illegal activities">Promoting illegal activities.</option>
+                            <option value="Promoting cheating during group collaborations">Promoting cheating during group collaborations.</option>
+                            <option value="Asking the users accomplish an additional task">Asking or making the users accomplish an academic task.</option>
+                            <option value="Sending exams/answer sheets from any institution">Sending exams/answer sheets from any institution.</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="report-btn" type="submit">Submit report</button>
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="col-12">
-            <button class="report-btn" type="submit">Submit form</button>
-        </div>
-    </form>
+    </div>
 </div>
-
 @endsection

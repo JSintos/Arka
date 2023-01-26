@@ -17,6 +17,10 @@
                         <div class="col-md-6">
                             <div class="m-3 p-2"><h2>Sign Up for an Account</h2><p>Create an account to join our different communities</p></div>
                             <!-- Validation Errors -->
+                            @if($message = Session::get('success'))
+                            <div class="alert alert-danger">
+                                <p>{{$message}}</p>
+                            </div>
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
                             <form method="POST" action="{{ route('register') }}" class="m-3">
                                 @csrf
@@ -40,31 +44,33 @@
                                 <div class="mb-3 row">
                                     <x-label for="password" :value="__('Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                    <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
-                                </div>
+                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
+                                    </div>
                                 </div>
 
                                 <!-- Confirm Password -->
                                 <div class="mb-3 row">
                                     <x-label for="password_confirmation" :value="__('Confirm Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                    <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
-                                </div>
-                                <div class="mb-3 row">
-                                    <div class="captcha">
-                                        <span>{!! captcha_img() !!}</span>
-                                        <button type="button" class="btn btn-danger" class="reload" id="reload">
-                                            &#x21bb;
-                                        </button>
+                                        <x-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
-                                    <div class="col-4">
-                                        <x-input id="captcha" class="form-control" type="text" name="captcha" required />
-                                    </div>
+                                <div class="row flex">
+                                        <div class="col-sm-3">
+                                            <span>{!! captcha_img() !!}</span>
+                                        </div>
+                                        <div class="col-sm-9 align-item-left">
+                                            <x-input id="captcha" class="form-control" placeholder="Enter the captcha text.." type="text" name="captcha" required />
+                                        </div>
                                 </div>
+<<<<<<< HEAD
                                 <!-- Terms and Condition//Privacy Policy-->
                                 <div class="col-12">
+=======
+                                
+                                  <!-- Terms and Condition -->
+                                <div class="col-12 mt-5">
+>>>>>>> 9401efc75332cb9f890d4dee8a4fa638f44e80cc
                                     <div class="form-check form-check-text">
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">

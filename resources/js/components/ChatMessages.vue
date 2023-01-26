@@ -44,14 +44,14 @@
                                 </li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li class="p-2">
-                                    <button
+                                    <a
                                         type="button"
                                         class="btn btn-danger"
-                                        @click="reportUser(message.user.userId)"
+                                        :href="'/report/' + message.user.userId"
                                     >
                                         <i class="fa-solid fa-flag mr-2"></i
                                         >report
-                                    </button>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -109,13 +109,6 @@ export default {
         thirdBadge(id) {
             this.$emit("thirdbadge", {
                 userId: id,
-            });
-        },
-        reportUser(id) {
-            var reportDesc = prompt();
-            this.$emit("reportuser", {
-                userId: id,
-                reportDescription: reportDesc,
             });
         },
     },
