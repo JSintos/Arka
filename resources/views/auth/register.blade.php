@@ -22,6 +22,7 @@
                                 <p>{{$message}}</p>
                             </div>
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            @endif
                             <form method="POST" action="{{ route('register') }}" class="m-3">
                                 @csrf
                                 <!-- Name -->
@@ -63,14 +64,9 @@
                                             <x-input id="captcha" class="form-control" placeholder="Enter the captcha text.." type="text" name="captcha" required />
                                         </div>
                                 </div>
-<<<<<<< HEAD
-                                <!-- Terms and Condition//Privacy Policy-->
-                                <div class="col-12">
-=======
                                 
                                   <!-- Terms and Condition -->
                                 <div class="col-12 mt-5">
->>>>>>> 9401efc75332cb9f890d4dee8a4fa638f44e80cc
                                     <div class="form-check form-check-text">
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">
