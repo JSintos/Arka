@@ -46,9 +46,22 @@ Route::get('/terms-and-condition', function () {
     return view('terms-and-condition');
 })->name('terms-and-condition');
 
-Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
 
-Route::middleware('auth')->group(function () {
+Route::get('/schooladmin', function () {
+    return view('school-admin-panel');
+})->name('school-admin-panel');
+
+// Auth::routes(['verify' => true]);
+
+Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('community', [CommunityController::class, 'create'])
                     ->name('community');
 
@@ -113,7 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/report/{userId}/', [ChatsController::class, 'sendReport']);
 });
 
-// Admin routes
+// Superadmin routes
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
     Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
