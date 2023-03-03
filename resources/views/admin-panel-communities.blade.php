@@ -6,14 +6,14 @@
 <div class="container p-5">
     <div class="pull-left">
         <h2>Arka Community List</h2>
-    </div>
+    </div>  
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Community List</button>
             <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Petitioned Communities</button>
         </div>
     </nav>
-
+    
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="row">
@@ -23,19 +23,19 @@
                     </div>
                 </div>
             </div>
-
+    
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
                 </div>
             @endif
-
+    
             <table class="table table-bordered">
                 <tr>
                     <th>Community Name</th>
                     <th width="180px">Action</th>
                 </tr>
-
+                
                 @foreach ($communities as $community)
                 <tr>
                     <td>{{ $community->communityName }}</td>
@@ -53,15 +53,17 @@
                     <p>{{ $message }}</p>
                 </div>
             @endif
-
+        
             <table class="table table-bordered">
                 <tr>
                     <th>Community Name</th>
+                    <th>Count</th>
                     <th width="180px"></th>
                 </tr>
                 @foreach ($petitions as $petition)
                 <tr>
                     <td>{{ $petition->reportDescription }}</td>
+                    <td>{{ $petition->Count}}</td>
                     <td>
                         <form action="{{ route('admin/community') }}" method="POST">
                             @csrf
