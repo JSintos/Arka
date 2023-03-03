@@ -79,7 +79,7 @@
         <!-- Button trigger modal -->
         <div class="mt-5">
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Rate us now
+            Rate Arka now
             </button>
         </div>
     </div>
