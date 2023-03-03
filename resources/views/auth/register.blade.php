@@ -6,11 +6,11 @@
 
     <section class="flex-column min-vh-80 justify-content-center align-items-center mt-5 p-5">
         <div class="container">
-            <div class="row">
+            <div class="row"> 
                 <div class="col-md-12 mx-auto rounded shadow bg-white">
                     <div class="row">
                         <div class="col-md-6">
-                            <div>
+                            <div> 
                                 <img src="../images/register.svg" alt="register-image" class="img-thumbnail border-0 p-2 mt-4">
                             </div>
                         </div>
@@ -21,7 +21,6 @@
                             <div class="alert alert-danger">
                                 <p>{{$message}}</p>
                             </div>
-                            @endif
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
                             @endif
                             <form method="POST" action="{{ route('register') }}" class="m-3">
@@ -46,7 +45,7 @@
                                 <div class="mb-3 row">
                                     <x-label for="password" :value="__('Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
+                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
                                     </div>
                                 </div>
 
@@ -65,7 +64,7 @@
                                             <x-input id="captcha" class="form-control" placeholder="Enter the captcha text.." type="text" name="captcha" required />
                                         </div>
                                 </div>
-
+                                
                                   <!-- Terms and Condition -->
                                 <div class="col-12 mt-5">
                                     <div class="form-check form-check-text">
@@ -97,7 +96,7 @@
             </div>
         </div>
     </section>
-<script type="application/javascript">
+<script type="text/javascript">
     $('#reload').click(function () {
         $.ajax({
             type: 'GET',
