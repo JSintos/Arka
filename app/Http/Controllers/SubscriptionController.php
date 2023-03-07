@@ -99,6 +99,8 @@ class SubscriptionController extends Controller
         
     }
 
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -112,7 +114,7 @@ class SubscriptionController extends Controller
         $request->validate([
             'referenceNumber' => ['required', 'string', 'max:255', 'unique:subscriptions'],
             'phoneNumber' => ['required', 'string', 'max:255'],
-            'amount' => ['required', 'integer'],
+            'amount' => ['required', 'integer', 'min:135'],
 
         ]);
 
