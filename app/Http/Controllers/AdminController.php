@@ -64,8 +64,8 @@ class AdminController extends Controller
             'communityName' => $communityName
         ]);
 
-        $update = Report::where('reportDescription', $communityName);
-        $update -> update(['resolutionStatus' => '1']);
+        $createdCommunity = Report::where('reportDescription', $communityName);
+        $createdCommunity->delete();
 
         return redirect('admin/community')->with('success', 'Petitioned Community created successfully!');
     }
