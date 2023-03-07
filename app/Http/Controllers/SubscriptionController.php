@@ -110,8 +110,10 @@ class SubscriptionController extends Controller
         // dd($request->all());
         
         $request->validate([
-            'referenceNumber' => ['required', 'string', 'max:255'],
-            'phoneNumber' => ['required', 'string', 'max:255']
+            'referenceNumber' => ['required', 'string', 'max:255', 'unique:subscriptions'],
+            'phoneNumber' => ['required', 'string', 'max:255'],
+            'amount' => ['required', 'integer'],
+
         ]);
 
         $id = Auth::user()->userId;
@@ -120,6 +122,7 @@ class SubscriptionController extends Controller
             'userId' => $id,
             'referenceNumber' => $request->referenceNumber,
             'phoneNumber' => $request->phoneNumber,
+            'amount' => $request->amount
         ]);
 
         return redirect()->back()->with("success","Availed for premium subscription!");

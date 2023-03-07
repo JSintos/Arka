@@ -45,6 +45,10 @@
                            <label for="phoneNumber"><strong>Phone Number:</strong></label>
                            <input type="text" class="form-control" id ="phoneNumber" name="phoneNumber" required>
                        </div>
+                       <div class="mt-4">
+                           <label for="amount"><strong>Amount Paid:</strong></label>
+                           <input type="number" class="form-control" id ="amount" name="amount" required>
+                       </div>
                        <div class="col-12 mt-4 button">
                             <button type="submit" class="secondary-btn">Submit</button>
                         </div>

@@ -57,7 +57,9 @@
                             <button type="submit" class="secondary-btn">Submit</button>
                         </div>
                     </form>
-                
+                        <button href="gcash-payment" class="secondary-btn">Payment</a>
+                        
+                        
                 </div>
             </div>
         </div>
