@@ -50,6 +50,7 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy-policy');
 
+
 Route::get('/schooladmin', function () {
     return view('school-admin-panel');
 })->name('school-admin-panel');
