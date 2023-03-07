@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -101,7 +102,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         $user->username = $request['name'];
-        $user->email = $request['email'];
+        $user->email = Crypt::encryptString($request['email']);
 
         $user->save();
 

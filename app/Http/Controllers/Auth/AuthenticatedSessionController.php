@@ -33,7 +33,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = auth()->user();
-        // dd($user);
 
         if($user->userType == 2)
         {
