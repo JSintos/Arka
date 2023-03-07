@@ -123,6 +123,9 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
     Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
+    Route::post('admin/subscriptions/delete', [AdminController:: class, 'deleteSubscription'])
+                ->name('admin/subscriptions/delete');
+
     Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
                 ->name('admin/community');
 
