@@ -50,13 +50,10 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy-policy');
 
-Route::get('/schooladmin', function () {
-    return view('school-admin-panel');
-})->name('school-admin-panel');
-
 // Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
+
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -157,6 +154,17 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
     Route::post('admin/reports/ban', [AdminController:: class, 'reportBanUser'])->name('admin/reports/ban');
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+
+    Route::get('admin/organizational-registration', [AdminController:: class, 'organizationalRegistration'])->name('admin/organizational-registration');
+
+    Route::post('admin/organizational-registration', [AdminController:: class, 'handleOrganizationalRegistration']);
+});
+
+// School admin routes
+Route::group(['middleware' => ['App\Http\Middleware\MustBeSchoolAdmin']], function () {
+    Route::get('/school-admin', function () {
+        return view('school-admin-panel');
+    })->name('school-admin-panel');
 });
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');

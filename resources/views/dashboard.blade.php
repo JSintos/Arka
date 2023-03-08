@@ -19,9 +19,11 @@
                     <li class="breadcrumb-item"><a href='subscription'>Subscriptions</a></li>
                     @endif
                     @if(Auth::user()->userType == 1)
-                    <li class="breadcrumb-item"><a href='admin/subscriptions'>Superadmin Panel</a></li>
+                    <li class="breadcrumb-item"><a href='admin/subscriptions'>Admin Panel</a></li>
                     @endif
-                    <li class="breadcrumb-item"><a href='/schooladmin'>Admin Panel</a></li>
+                    @if(Auth::user()->userType == 2)
+                    <li class="breadcrumb-item"><a href='/school-admin'>Admin Panel</a></li>
+                    @endif
                 </ol>
             </nav>
         </div>
@@ -92,7 +94,7 @@
             $('#exampleModal').modal('show');
         }
     });
-    
+
     window.__be = window.__be || {};
     window.__be.id = "637091ec6fd6ba0007db3b6f";
     (function() {

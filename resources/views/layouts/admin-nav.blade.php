@@ -14,6 +14,7 @@
                 <a class="nav-link" href="community">Communities<span class="sr-only">(current)</span></a>
                 <a class="nav-link" href="reports">Reports</a>
                 <a class="nav-link" href="feedbacks">Feedback</a>
+                <a class="nav-link" href="organizational-registration">Organizational Registration</a>
             </div>
         </div>
     </div>
