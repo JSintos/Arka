@@ -4,7 +4,7 @@
 @section('title','ARKA')
 
 <meta name="valid" content="{{ $valid }}">
-<!-- Stars Modal --> 
+<!-- Stars Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -68,7 +68,7 @@
                 <div class="home-card" style="width: 18rem;">
                     <div class="card-body ">
                         <h5 class="card-title">{{ $community->communityName }}</h5>
-                        <a href="/chat" class="main-btn">Join Chat</a>
+                        <a href="/chat/{{ $community->communityName }}" id="joinChatBtn" class="main-btn">Join Chat</a>
                     </div>
                 </div>
             </div>
@@ -127,12 +127,11 @@
     var valid = $('meta[name="valid"]').attr('content');
 
     $(document).ready(function(){
-        console.log("asd");
         if(valid){
             $('#exampleModal').modal('show');
         }
     });
-    
+
     window.__be = window.__be || {};
     window.__be.id = "637091ec6fd6ba0007db3b6f";
     (function() {
@@ -141,9 +140,5 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
     })();
 </script>
-
-
-
-
 
 @endsection

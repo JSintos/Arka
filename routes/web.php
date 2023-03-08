@@ -104,7 +104,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
 
-    Route::get('/chat', [ChatsController::class, 'index']);
+    Route::get('/chat/{communityName}', [ChatsController::class, 'index']);
 
     Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 

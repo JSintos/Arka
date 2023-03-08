@@ -12,6 +12,12 @@
     </div>
     <div class="chat-footer">
         <chat-form v-on:messagesent="addMessage" :user="{{ Auth::user() }}"></chat-form>
+        <button id="muteBtn">mute</button>
+        <button id="joinOrLeaveBtn">join</button>
+        <!-- <br><label> Local Audio Level :</label>
+        <input type="range" min="0" id= "localAudioVolume" max="100" step="1"><br>
+        <label> Remote Audio Level :</label>
+        <input type="range" min="0" id= "remoteAudioVolume" max="100" step="1"> -->
     </div>
 </div>
 
