@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="/report/{{ $reportedUser->userId }}">
+                <form method="POST" action="/report/{{ $reportedUser->userId }}" enctype="multipart/form-data">
                     @csrf
                     <h3>You are reporting {{ $reportedUser->username }}.</h3>
 
@@ -36,12 +36,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Briefly explain your reason for reporting this user.."></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Briefly explain your reason for reporting this user.." required name="comment"></textarea>
                     </div>
                     <div class="mb-3">
                     <h5 class="mt-3">Upload proof</h5>
                         <label for="formFile" class="form-label">Kindly submit a proof (i.e. screenshots/image) to help us better review your report.</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input class="form-control" type="file" required name="image">
                     </div>
                    
                         <button class="report-btn" type="submit">Submit report</button>

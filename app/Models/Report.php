@@ -21,6 +21,7 @@ class Report extends Model
         'userId', 
         'reportDescription', 
         'reportedUserId',
+        'image',
         'status',
         'resolutionStatus',
         'resolvedBy'
