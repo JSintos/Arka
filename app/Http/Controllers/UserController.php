@@ -105,7 +105,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/dashboard');
+        return redirect('/update-user');
     }
 
     public function showChangePassword() {
