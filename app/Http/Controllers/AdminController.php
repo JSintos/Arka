@@ -37,6 +37,17 @@ class AdminController extends Controller
 
         return back()->with('success','User subscription verfied successfully!');
     }
+    
+    public function deleteSubscription(Request $request)
+    {
+        $id = $request['subscriptionId'];
+        $subscription = Subscription::find($id);
+
+        $subscription->delete();
+
+        return back()->with('success', 'User subscription deleted successfully');
+        
+    }
 
     public function indexCommunity()
     {

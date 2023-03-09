@@ -19,6 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('userId')->references('userId')->on('users');
             $table->string('referenceNumber');
             $table->string('phoneNumber');
+            $table->decimal('amount', 6,2);
             $table->dateTime('subscriptionDate')->nullable()->default(null);
             $table->dateTime('expirationDate')->nullable()->default(null);
             $table->boolean('isConfirmed')->default(false);

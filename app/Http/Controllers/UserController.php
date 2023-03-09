@@ -149,8 +149,6 @@ class UserController extends Controller
             $user->save();
             return redirect('/update-user')->with("error","Profile successfully changed!");
         }
-
-      
     }
 
     public function showChangePassword() {

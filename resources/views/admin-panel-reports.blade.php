@@ -20,7 +20,9 @@
                 <tr>
                   <th>User</th>
                   <th>Report Description</th>
+                  <th>Comment</th>
                   <th>Reported User</th>
+                  <th>Image</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -32,11 +34,16 @@
                   @endif
                 @endforeach
                 <td>{{ $unresolved->reportDescription }}</td>
+                <td>{{ $unresolved->comment}}</th>
                 @foreach ($users as $user)
                   @if($unresolved->reportedUserId == $user->userId)
                 <td>{{ $user->username }}</td>
                   @endif
                 @endforeach
+                <td>
+                   <img src="{{ url('public/images/'.$unresolved->image) }}"
+                    style="height: 100px; width: 150px;">
+	              </td>
                 <td>
                   <form action="{{ route('admin/reports/ban') }}" method="POST">
                     @csrf
@@ -67,8 +74,10 @@
               <tr>
                 <th>User ID</th>
                 <th>Report Description</th>
+                <th>Comment</th>
                 <th>Reported User ID</th>
                 <th>Resolution Status</th>
+                <th>Image</th>
                 <th>Resolved By</th>
               </tr>
             </thead>
@@ -80,6 +89,7 @@
                   @endif
                 @endforeach
                 <td>{{ $resolved->reportDescription }}</td>
+                <td>{{ $resolved->comment}}</th>
                 @foreach ($users as $user)
                   @if($resolved->reportedUserId == $user->userId)
                 <td>{{ $user->username }}</td>
@@ -91,6 +101,10 @@
                 @if($resolved->resolutionStatus == 1)
                 <td>Banned</td>
                 @endif
+                <td>
+                   <img src="{{ url('public/images/'.$resolved->image) }}"
+                    style="height: 100px; width: 150px;">
+	              </td>
                 @foreach ($users as $user)
                   @if($resolved->resolvedBy == $user->userId)
                 <td>{{ $user->username }}</td>

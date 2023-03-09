@@ -21,6 +21,7 @@ class Subscription extends Model
         'userId', 
         'referenceNumber', 
         'phoneNumber',
+        'amount',
         'subscriptionDate',
         'expirationDate',
         'isConfirmed'
