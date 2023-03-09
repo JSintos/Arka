@@ -16,13 +16,21 @@
         <tr>
             <th>Username</th>
             <th>Email</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
 
         @foreach ($users as $user)
         <tr>
             <td>{{ $user->username }}</td>
-            <td>{{ $user->email }}</td>
+            <td>{{ Crypt::DecryptString($user->email) }}</td>
+            @if($user->userType == 2)
+                <td>Banned</td>
+            @elseif($user->userType == 4)
+                <td>Deactivated</td>
+            @else
+                <td>Active</td>
+            @endif
             <td>
 
                 <form action="{{ route('deactivate') }}" method="POST">
