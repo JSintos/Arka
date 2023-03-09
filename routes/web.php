@@ -50,6 +50,7 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy-policy');
 
+Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned']], function () {
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -117,6 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/report/{userId}/', [ChatsController::class, 'sendReport']);
 });
 
+
 // Admin routes
 Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
     Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
@@ -151,6 +153,8 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
     Route::post('admin/reports/ban', [AdminController:: class, 'reportBanUser'])->name('admin/reports/ban');
 
     Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+});
+
 });
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');
