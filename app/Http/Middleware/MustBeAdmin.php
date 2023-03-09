@@ -17,7 +17,7 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->userType == 0 || auth()->user()?->userType == 2 || auth()->user()?->userType == 3){
+        if (auth()->user()?->userType == 0 || auth()->user()?->userType == 2 || auth()->user()?->userType == 3 || auth()->user()?->userType == 4){
             abort(Response::HTTP_FORBIDDEN);
         }
 

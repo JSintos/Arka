@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrganizationalRegistrationEmail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -40,7 +41,7 @@ class AdminController extends Controller
 
         return back()->with('success','User subscription verfied successfully!');
     }
-    
+
     public function deleteSubscription(Request $request)
     {
         $id = $request['subscriptionId'];
@@ -49,7 +50,7 @@ class AdminController extends Controller
         $subscription->delete();
 
         return back()->with('success', 'User subscription deleted successfully');
-        
+
     }
 
     public function indexCommunity()
@@ -61,7 +62,7 @@ class AdminController extends Controller
                         ->where('resolutionStatus', '=', '0')
                         ->groupBy('reportDescription')
                         ->get();
-                        
+
         return view('admin-panel-communities',compact('communities', 'petitions'));
     }
 
@@ -246,7 +247,7 @@ class AdminController extends Controller
 
                 $user = User::create([
                     'username' => $tentativeUsername,
-                    'email' => $data[2],
+                    'email' => Crypt::encryptString($data[2]),
                     'password' => Hash::make($userPassword),
                     'userType' => 0,
                     'badgeList' => json_encode(array("badgeOne" => 0, "badgeTwo" => 0, "badgeThree" => 0)),
@@ -275,7 +276,7 @@ class AdminController extends Controller
         return view('school-admin-panel')->with('users', $users);
     }
 
-    public function deactivateStudent(){
+    public function deactivateStudent(Request $request){
         $deactivatedStudent = DB::table('users')->where('userId', $request['deactivateUserId']);
         $deactivatedStudent->update(["userType" => 4]);
 

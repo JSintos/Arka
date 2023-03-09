@@ -3,3 +3,4 @@ Good day!
 Email address: {{ $emailAddress }} <br>
 Username: {{ $username }} <br>
 Password: {{ $password }}
+

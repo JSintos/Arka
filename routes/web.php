@@ -52,7 +52,7 @@ Route::get('/privacy-policy', function () {
 
 // Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned']], function () {
+Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned', 'App\Http\Middleware\MustBeActivated']], function () {
 
   Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
@@ -60,7 +60,7 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned']], function 
       return view('auth.verify-email');
   })->middleware('auth')->name('verification.notice');
 
-  Route::middleware('auth', 'verified')->group(function () {
+  Route::middleware('auth')->group(function () {
       Route::get('community', [CommunityController::class, 'create'])
                       ->name('community');
 
