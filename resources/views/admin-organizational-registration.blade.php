@@ -3,6 +3,12 @@
 @section('content')
 @section('title','ARKA-Admin')
 <div class="container p-5">
+    @if($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
+
     <form action="{{ route('admin/organizational-registration') }}" enctype='multipart/form-data' method="POST">
         @csrf
 
@@ -18,6 +24,13 @@
                 <div class="form-group">
                     <label class="form-label"><strong>Educational Institution:</strong></label>
                     <input type="text" name="educationalInstitution" id="educationalInstitution" class="form-control" placeholder="Educational institution">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-label"><strong>School admin username:</strong></label>
+                    <input type="text" name="schoolAdminUsername" id="schoolAdminUsername" class="form-control" placeholder="School admin username">
                 </div>
             </div>
 

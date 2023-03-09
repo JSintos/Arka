@@ -162,9 +162,9 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () 
 
 // School admin routes
 Route::group(['middleware' => ['App\Http\Middleware\MustBeSchoolAdmin']], function () {
-    Route::get('/school-admin', function () {
-        return view('school-admin-panel');
-    })->name('school-admin-panel');
+    Route::get('/school-admin', [AdminController:: class, 'getSchoolAdminPanel'])->name('school-admin-panel');
+
+    Route::post('/deactivate', [AdminController:: class, 'deactivateStudent'])->name('deactivate');
 });
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');

@@ -21,7 +21,7 @@
                     @if(Auth::user()->userType == 1)
                     <li class="breadcrumb-item"><a href='admin/subscriptions'>Admin Panel</a></li>
                     @endif
-                    @if(Auth::user()->userType == 2)
+                    @if(Auth::user()->userType == 3)
                     <li class="breadcrumb-item"><a href='/school-admin'>Admin Panel</a></li>
                     @endif
                 </ol>

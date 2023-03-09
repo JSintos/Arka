@@ -41,6 +41,12 @@ class AuthenticatedSessionController extends Controller
             return redirect('login')->with('success', 'Your account is banned!');
         }
 
+        if($user->userType == 4)
+        {
+            $request->session()->invalidate();
+            return redirect('login')->with('success', 'Your account has been deactivated!');
+        }
+
         if($user->communityList == null)
         {
             return redirect('/community');
