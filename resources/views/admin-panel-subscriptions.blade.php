@@ -23,6 +23,7 @@
                   <th>User ID</th>
                   <th>Reference Number</th>
                   <th>Phone Number</th>
+                  <th>Amount</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -31,11 +32,17 @@
                 <td>{{ $subscription->userId }}</td>
                 <td>{{ $subscription->referenceNumber }}</td>
                 <td>{{ $subscription->phoneNumber }}</td>
+                <td>{{ $subscription->amount }}</td>
                 <td>
                   <form action="{{ route('admin/subscriptions') }}" method="POST">
                     @csrf
                     <input type="hidden" id ="subscriptionId" name="subscriptionId" value="{{ $subscription->subscriptionId }}" required>
                     <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-check mr-2"></i>Verify</button>
+                  </form>
+                  <form action="{{ route('admin/subscriptions/delete') }}" method="POST">
+                    @csrf
+                    <input type="hidden" id ="subscriptionId" name="subscriptionId" value="{{ $subscription->subscriptionId }}" required>
+                    <button type="delete" class="btn btn-outline-danger "><i class="fa-solid fa-check mr-2"></i>Delete</button>
                   </form>
                 </td>            
               </tr>
@@ -50,6 +57,7 @@
                 <th>User ID</th>
                 <th>Reference Number</th>
                 <th>Phone Number</th>
+                <th>Amount</th>
               </tr>
             </thead>
             @foreach ($verifiedSubs as $verifiedSub)
@@ -57,6 +65,7 @@
                 <td>{{ $verifiedSub->userId }}</td>
                 <td>{{ $verifiedSub->referenceNumber }}</td>
                 <td>{{ $verifiedSub->phoneNumber }}</td>
+                <td>{{ $verifiedSub->amount }}</td>
               </tr>
               @endforeach
             </table>

@@ -17,7 +17,7 @@ class ChatsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($communityName)
     {
         return view('chat');
     }
@@ -70,15 +70,29 @@ class ChatsController extends Controller
 
     public function sendReport($reportedUserId, Request $request){
         $reportedUser = DB::table('users')->where('userId', $reportedUserId)->first();
+        // dd($request);
+        $data = new Report();
 
         $userId = Auth::user()->userId;
 
-        $newReport = Report::create([
-            'userId' => $userId,
-            'reportDescription' => $request->all()["reason"],
-            'reportedUserId' => $reportedUserId
-        ]);
-
+        $data['userId'] = $userId;
+        $data['reportDescription'] = $request->all()["reason"];
+        $data['reportedUserId'] = $reportedUserId;
+        $data['comment'] = $request->all()["comment"];
+       
+        if($request->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/images'), $filename);
+            $data['image'] = $filename;
+        }
+        // $newReport = Report::create([
+        //     'userId' => $userId,
+        //     'reportDescription' => $request->all()["reason"],
+        //     'reportedUserId' => $reportedUserId,
+        //     'image' => $request->image
+        // ]);
+        $data->save();
         return redirect()->back()->with('success', 'You have successfully reported ' . $reportedUser->username);
     }
 }

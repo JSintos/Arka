@@ -7,6 +7,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,33 +32,50 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $emails = User::all();
+        // $request->authenticate();
+        $email = $request['email'];
+        $password = $request['password'];
 
-        $request->session()->regenerate();
-
-        $user = auth()->user();
-        // dd($user);
-
-        if($user->userType == 2)
-        {
-            $request->session()->invalidate();
-            return redirect('login')->with('success', 'Your account is banned!');
+        foreach($emails as $email){
+            if(Crypt::decryptString($email->email) == $request['email']){
+                $registeredUser = User::where('email', '=', $email->email)->first();
+                break;
+            }
         }
 
-        if($user->userType == 4)
-        {
-            $request->session()->invalidate();
-            return redirect('login')->with('success', 'Your account has been deactivated!');
+        if(!Hash::check($password, $registeredUser->password)){
+            return redirect('login')->with('success', 'Given credentials is incorrect');
         }
+        else{
+            Auth::login($registeredUser);
+            
+            $request->session()->regenerate();
 
-        if($user->communityList == null)
-        {
-            return redirect('/community');
+            $user = auth()->user();
+    
+            if($user->userType == 2)
+            {
+                $request->session()->invalidate();
+                return redirect('login')->with('success', 'Your account is banned!');
+            }
+            
+            if($user->userType == 4)
+            {
+                $request->session()->invalidate();
+                return redirect('login')->with('success', 'Your account has been deactivated!');
+            }
+    
+            if($user->communityList == null)
+            {
+                return redirect('/community');
+            }
+            else
+            {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
         }
-        else
-        {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
+       
     }
 
     /**

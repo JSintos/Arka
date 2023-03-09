@@ -65,20 +65,54 @@ activities.</li>
     <tbody>
       <tr>
         <td>Basic</td>
-        <td>Maximum of 10 Communities<br>
-            Maximum of 8 joined users per created room</td>
-        <td>Free</td>
+        <td>
+            <ul style="list-style-type:disc;">
+                <li>This can be availed by any student however, some access are limited such as:</li>
+                <li>There’s only a maximum of 3 communities to join in;</li>
+                <li>and a maximum of 8 joined users per rooms created.</li>
+            </ul>
+        </td>
+        <td>
+        <ul style="list-style-type:disc;">
+                <li>FREE</li>
+            </ul>
+        </td>
       </tr>
       <tr>
-        <td>Premium</td>
-        <td>Maximum of 25 communities<br>
-            Maximum of 15 joined users per created room</td>
-        <td>Payment via GCash<br>
-            Individual - ₱135 monthly or ₱1620 annually<br>
-            Organizational Subscription - ₱1464 annually</td>
+        <td>Premium - Individual</td>
+        <td>
+            <ul style="list-style-type:disc;">
+                <li>This can be availed by any student who are enrolled or not enrolled in any school/organization. With a paid subscription, users can have access to:</li>
+                <li>a maximum of 10 communities to join in;</li>
+                <li>and a maximum of 8 joined users per rooms created.</li>
+            </ul>
+        </td>
+        <td>
+        <ul style="list-style-type:disc;">
+                <li>Payments can be made via Gcash.</li>
+                <li>Individual Subscription costs - ₱135 monthly or ₱1,620 annually.</li>
+            </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Premium - Organizational</td>
+        <td>
+            <ul style="list-style-type:disc;">
+                <li>This subscription option can be availed by schools/institutions. They can buy accounts in bulk for a lower price. This subscription allows subscribed users to have:</li>
+                <li>a maximum of 10 communities to join in;</li>
+                <li>a maximum of 15 joined users per created room</li>
+            </ul>
+        </td>
+        <td>
+        <ul style="list-style-type:disc;">
+                <li>Payments can be made via Gcash.</li>
+                <li>Organizational Subscription costs - ₱1,464 annually.</li>
+            </ul>
+        </td>
       </tr>
     </tbody>
   </table>
+  <p>The <strong>premium individual</strong> subscription can be availed by anyone not belonging to a school/institution who wishes to access Arka’s paid features. Meanwhile, <strong>premium organizational</strong> subscriptions can only be availed by institutions, specifically academic institutions who wish to buy accounts in bulk and subscribe their students to Arka. This subscription will allow the school/institution to have access in a school admin dashboard that would grant them to view active subscriber’s accounts. </p>
 </div>
 
 <p><b>IV. Termination</b></p>
