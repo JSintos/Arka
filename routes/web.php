@@ -131,8 +131,10 @@ Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned', 'App\Http\M
 
       Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
-      Route::post('admin/subscriptions/delete', [AdminController:: class, 'deleteSubscription'])
-                  ->name('admin/subscriptions/delete');
+    Route::post('admin/subscriptions/deny', [AdminController:: class, 'denySubscription'])
+                ->name('admin/subscriptions/deny');
+    Route::post('admin/subscriptions/deny-email', [AdminController::class, 'deniedEmailSubscription'])
+                ->name('admin/subscription/deny-email');
 
       Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
                   ->name('admin/community');

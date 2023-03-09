@@ -13,6 +13,7 @@ use App\Models\Chart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\DenySubscription;
 use App\Mail\OrganizationalRegistrationEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
@@ -41,16 +42,31 @@ class AdminController extends Controller
 
         return back()->with('success','User subscription verfied successfully!');
     }
-
-    public function deleteSubscription(Request $request)
+  
+    public function denySubscription(Request $request)
     {
         $id = $request['subscriptionId'];
         $subscription = Subscription::find($id);
+        $userId = $subscription->userId;
 
+        $users = User::all();
+
+        foreach($users as $user){
+            if($user->userId == $userId){
+                $deniedUser = $user;
+                break;
+            }
+        }
         $subscription->delete();
 
-        return back()->with('success', 'User subscription deleted successfully');
+      return view('admin-panel-subscriptions-deny', compact('deniedUser'));
+    }
 
+    public function deniedEmailSubscription(Request $request){
+        $comment = $request->comment;
+        Mail::to($request->email)->send(new DenySubscription($comment));
+
+        return redirect('admin/subscriptions')->with('success', 'Email sent and subscription denied successfully');
     }
 
     public function indexCommunity()
