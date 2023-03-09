@@ -39,10 +39,10 @@
                     <input type="hidden" id ="subscriptionId" name="subscriptionId" value="{{ $subscription->subscriptionId }}" required>
                     <button type="submit" class="btn btn-outline-secondary "><i class="fa-solid fa-check mr-2"></i>Verify</button>
                   </form>
-                  <form action="{{ route('admin/subscriptions/delete') }}" method="POST">
+                  <form action="{{ route('admin/subscriptions/deny') }}" method="POST">
                     @csrf
                     <input type="hidden" id ="subscriptionId" name="subscriptionId" value="{{ $subscription->subscriptionId }}" required>
-                    <button type="delete" class="btn btn-outline-danger "><i class="fa-solid fa-check mr-2"></i>Delete</button>
+                    <button type="delete" class="btn btn-outline-danger "><i class="fa-solid fa-check mr-2"></i>Deny</button>
                   </form>
                 </td>            
               </tr>
