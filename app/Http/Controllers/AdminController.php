@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
- 
+
     public function getAdminPanel()
     {
         $subscriptions = Subscription::where('isConfirmed', 0)->get();
@@ -30,7 +30,7 @@ class AdminController extends Controller
         $id = $request['subscriptionId'];
 
         $subscription = Subscription::find($id);
-        $subscription->subscriptionDate = $now; 
+        $subscription->subscriptionDate = $now;
         $subscription->expirationDate = $month;
         $subscription->isConfirmed = 1;
         $subscription->save();
@@ -59,7 +59,6 @@ class AdminController extends Controller
                         ->groupBy('reportDescription')
                         ->get();
 
-    
         return view('admin-panel-communities',compact('communities', 'petitions'));
     }
 
@@ -85,7 +84,7 @@ class AdminController extends Controller
         return view('admin-panel-communities-create');
     }
 
- 
+
     public function storeCommunity(Request $request)
     {
         $request->validate([
@@ -114,7 +113,7 @@ class AdminController extends Controller
 
         return redirect('/admin/community')->with('success', 'Community updated successfully!');
     }
-    
+
     // public function deleteCommunity(Request $request)
     // {
     //     $remove = Community::find($community);
@@ -138,7 +137,7 @@ class AdminController extends Controller
         {
             return redirct('/admin/community')->with('error', 'Community not found.');
         }
-        
+
     }
 
     public function getReports()
@@ -152,8 +151,8 @@ class AdminController extends Controller
     {
         $id = $request['reportId'];
         $user = Auth::user();
-       
-        $unresolved = Report::find($id); 
+
+        $unresolved = Report::find($id);
         $unresolved->status = 1;
         $unresolved->resolutionStatus = 0;
         $unresolved->resolvedBy = $user->userId;
@@ -190,10 +189,10 @@ class AdminController extends Controller
                     ->orderBy(DB::raw("MONTH(created_at)"))
                     ->groupBy(DB::raw("MONTH(created_at)"))
                     ->get();
-        
+
         $res[] = ['month', 'average'];
 
-       
+
         foreach($feedbacks as $key => $val){
             $res[++$key] = [$val->month, (double)$val->average];
         }

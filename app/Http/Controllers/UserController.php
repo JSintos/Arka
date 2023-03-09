@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -92,20 +94,61 @@ class UserController extends Controller
     public function profileUpdate(Request $request){
         //validation rules
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255', 'unique:users,username'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
+        $emails = User::all();
         $user = Auth::user();
 
-        $user->username = $request['name'];
-        $user->email = $request['email'];
+        $decryptedEmail = Crypt::decryptString($user->email);
 
-        $user->save();
+        if($request['name'] == $user->username){
 
-        return redirect('/update-user');
+            // $request->validate([
+            //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            //     // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // ]);
+            
+            foreach($emails as $email){
+                    if(Crypt::decryptString($email->email) == $request['email']){
+                        return back();
+                        break;
+                    }
+                }
+            
+
+            $user->email = Crypt::encryptString($request['email']);
+            $user->save();
+
+            return redirect('/update-user')->with("error","Email successfully changed!");
+        }
+
+        else if($request['email'] == $decryptedEmail){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255', 'unique:users,username']
+                // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+
+            $user->username = $request['name'];
+            $user->save();
+
+            return redirect('/update-user')->with("error","Username successfully changed!");
+        }
+
+        else {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255', 'unique:users,username'],
+                
+            ]); 
+            foreach($emails as $email){
+                if(Crypt::decryptString($email->email) == $request['email']){
+                    return back();
+                    break;
+                }
+            }
+            
+            $user->email = Crypt::encryptString($request['email']);
+            $user->username = $request['name'];
+            $user->save();
+            return redirect('/update-user')->with("error","Profile successfully changed!");
+        }
     }
 
     public function showChangePassword() {

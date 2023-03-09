@@ -6,11 +6,11 @@
 
     <section class="flex-column min-vh-80 justify-content-center align-items-center mt-5 p-5">
         <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-md-12 mx-auto rounded shadow bg-white">
                     <div class="row">
                         <div class="col-md-6">
-                            <div> 
+                            <div>
                                 <img src="../images/register.svg" alt="register-image" class="img-thumbnail border-0 p-2 mt-4">
                             </div>
                         </div>
@@ -27,9 +27,10 @@
                                 @csrf
                                 <!-- Name -->
                                 <div class="mb-3 row">
-                                    <x-label for="name" :value="__('Name')" class="col-sm-2 col-form-label-sm"/>
+                                    <x-label for="name" :value="__('Username')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
                                         <x-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus />
+                                        <small>Don't use your real name for your username.</small>
                                     </div>
                                 </div>
 
@@ -45,7 +46,7 @@
                                 <div class="mb-3 row">
                                     <x-label for="password" :value="__('Password')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
-                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" /> 
+                                        <x-input id="password" class="form-control" type="password" name="password" required autocomplete="new-password" />
                                     </div>
                                 </div>
 
@@ -64,7 +65,7 @@
                                             <x-input id="captcha" class="form-control" placeholder="Enter the captcha text.." type="text" name="captcha" required />
                                         </div>
                                 </div>
-                                
+
                                   <!-- Terms and Condition -->
                                 <div class="col-12 mt-5">
                                     <div class="form-check form-check-text">
