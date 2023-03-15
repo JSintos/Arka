@@ -14,7 +14,7 @@ Link to the paper: https://drive.google.com/file/d/1zntvHDDNu1rRH8DG0xv4psZmaOzC
 
 The motivation behind this project came from a collective disruption in learning that the COVID-19 lockdown brought. The unexpected shift from physical learning to a virtual space has created a negative impact on the students and highlighted the increase of academic burnout during distance learning.
 
-To provide a solution to the evident problem of increased academic burnout and lack of motivation during distance learning, our team came up with an idea of developing a web-based communication platform with the main purpose of encouraging emotional support and peer collaboration.
+To provide a solution to the evident problem of lack of motivation and increased academic burnout during distance learning, our team came up with an idea of developing a web-based communication platform with the main purpose of encouraging emotional support and peer collaboration.
 
 ## Installation
 
