@@ -21,15 +21,16 @@
                             <div class="alert alert-danger">
                                 <p>{{$message}}</p>
                             </div>
-                            @endif
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                            @endif
                             <form method="POST" action="{{ route('register') }}" class="m-3">
                                 @csrf
                                 <!-- Name -->
                                 <div class="mb-3 row">
-                                    <x-label for="name" :value="__('Name')" class="col-sm-2 col-form-label-sm"/>
+                                    <x-label for="name" :value="__('Username')" class="col-sm-2 col-form-label-sm"/>
                                     <div class="col-sm-10">
                                         <x-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus />
+                                        <small>Don't use your real name for your username.</small>
                                     </div>
                                 </div>
 
@@ -71,8 +72,13 @@
                                     <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                     <label class="form-check-label text-sm" for="gridCheck">
                                         I agree with the <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('terms-and-condition') }}">
-                                        {{ __('Terms & Conditions of Arka.') }}
-                                    </a>
+                                        {{ __('Terms & Conditions') }}
+                                    </a> and
+                                    </label>
+                                    <label class="form-check-label text-sm" for="gridCheck">
+                                       <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('privacy-policy') }}">
+                                        {{ __('Privacy Policy') }}
+                                    </a> of Arka.
                                     </label>
                                     </div>
                                 </div>
@@ -91,7 +97,7 @@
             </div>
         </div>
     </section>
-<script type="application/javascript">
+<script type="text/javascript">
     $('#reload').click(function () {
         $.ajax({
             type: 'GET',

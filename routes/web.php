@@ -46,104 +46,133 @@ Route::get('/terms-and-condition', function () {
     return view('terms-and-condition');
 })->name('terms-and-condition');
 
-Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy-policy');
 
-Route::middleware('auth')->group(function () {
-    Route::get('community', [CommunityController::class, 'create'])
-                    ->name('community');
+// Auth::routes(['verify' => true]);
 
-    Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
-                    ->name('addCommunity');
+Route::group(['middleware' => ['App\Http\Middleware\MustBeUnbanned', 'App\Http\Middleware\MustBeActivated']], function () {
 
-    Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
-                    ->name('removeCommunity');
+  Route::get('/home', [HomeController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
-    Route::post('community', [CommunityController::class, 'store']);
+  Route::get('/email/verify', function () {
+      return view('auth.verify-email');
+  })->middleware('auth')->name('verification.notice');
 
-    Route::get('/community-list', [CommunityController::class, 'index'])
-                    ->name('community-list');
+  Route::middleware('auth')->group(function () {
+      Route::get('community', [CommunityController::class, 'create'])
+                      ->name('community');
 
-    Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
-                    ->name('addCommunity');
+      Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+                      ->name('addCommunity');
 
-    Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
-                    ->name('removeCommunity');
+      Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+                      ->name('removeCommunity');
 
-    Route::get('update-user', [UserController:: class, 'create'])
-                    ->name('update-user');
+      Route::post('community', [CommunityController::class, 'store']);
 
-    Route::post('update-user', [UserController:: class, 'profileUpdate']);
+      Route::get('/community-list', [CommunityController::class, 'index'])
+                      ->name('community-list');
 
-    Route::get('change-password', [UserController::class, 'showChangePassword'])
-                    ->name('change-password');
+      Route::post('community/{community}/add', [CommunityController::class, 'addCommunity'])
+                      ->name('addCommunity');
 
-    Route::post('change-password', [UserController::class, 'changePassword']);
+      Route::post('community/{community}/remove', [CommunityController::class, 'removeCommunity'])
+                      ->name('removeCommunity');
 
-    Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
-                    ->middleware(['auth'])->name('storeMonthlyFeedback');
+      Route::get('update-user', [UserController:: class, 'create'])
+                      ->name('update-user');
 
-    Route::get('subscription', [SubscriptionController:: class, 'create'])
-                    ->name('subscription');
+      Route::post('update-user', [UserController:: class, 'profileUpdate']);
 
-    Route::get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
-                    ->name('organizational-subscription');
+      Route::get('change-password', [UserController::class, 'showChangePassword'])
+                      ->name('change-password');
 
-    Route::post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
+      Route::post('change-password', [UserController::class, 'changePassword']);
 
-    Route::get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
-                    ->name('gcash-payment');
+      Route::post('store-monthly-feedback', [HomeController::class, 'storeMonthlyFeedback'])
+                      ->middleware(['auth'])->name('storeMonthlyFeedback');
 
-    Route::post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
+      Route::get('subscription', [SubscriptionController:: class, 'create'])
+                      ->name('subscription');
 
-    Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
-                    ->name('request-community');
+      Route::get('organizational-subscription', [OrganizationalSubscriptionController:: class, 'create'])
+                      ->name('organizational-subscription');
 
-    Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
+      Route::post('organizational-subscription', [OrganizationalSubscriptionController:: class, 'store']);
 
-    Route::get('/chat', [ChatsController::class, 'index']);
+      Route::get('gcash-payment', [SubscriptionController:: class, 'getPayment'])
+                      ->name('gcash-payment');
 
-    Route::get('/messages', [ChatsController::class, 'fetchMessages']);
+      Route::post('gcash-payment', [SubscriptionController:: class, 'postPayment']);
 
-    Route::post('/messages', [ChatsController::class, 'sendMessage']);
+      Route::get('request-community', [ReportController:: class, 'getRequestCommunity'])
+                      ->name('request-community');
 
-    Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
+      Route::post('request-community', [ReportController:: class, 'postRequestCommunity']);
 
-    Route::get('/report/{userId}/', [ChatsController::class, 'reportUser']);
+      Route::get('/chat/{communityName}', [ChatsController::class, 'index']);
 
-    Route::post('/report/{userId}/', [ChatsController::class, 'sendReport']);
-});
+      Route::get('/messages', [ChatsController::class, 'fetchMessages']);
 
-// Admin routes
-Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
-    Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
+      Route::post('/messages', [ChatsController::class, 'sendMessage']);
 
-    Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
+      Route::post('/commend/{badgeNumber}/{userId}', [ChatsController::class, 'commendUser']);
 
-    Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
-                ->name('admin/community');
+      Route::get('/report/{userId}/', [ChatsController::class, 'reportUser']);
 
-    Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
+      Route::post('/report/{userId}/', [ChatsController::class, 'sendReport']);
+  });
 
-    Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
-                ->name('admin/community/create');
+  // Superadmin routes
+  Route::group(['middleware' => ['App\Http\Middleware\MustBeAdmin']], function () {
+      Route::get('admin/subscriptions', [AdminController:: class, 'getAdminPanel'])->name('admin/subscriptions');
 
-    Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
+      Route::post('admin/subscriptions', [AdminController:: class, 'verifySubscription']);
 
-    Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
-                ->name('admin/community/delete');
+    Route::post('admin/subscriptions/deny', [AdminController:: class, 'denySubscription'])
+                ->name('admin/subscriptions/deny');
+    Route::post('admin/subscriptions/deny-email', [AdminController::class, 'deniedEmailSubscription'])
+                ->name('admin/subscription/deny-email');
 
-    Route::get('admin/community/{community}/edit', [AdminController:: class, 'editCommunity'])
-                ->name('admin/community/{community}/edit');
+      Route::get('admin/community', [AdminController:: class, 'indexCommunity'])
+                  ->name('admin/community');
 
-    Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
+      Route::post('admin/community', [AdminController:: class, 'createPetitionedCommunity']);
 
-    Route::get('admin/reports', [AdminController:: class, 'getReports'])->name('admin/reports');
+      Route::get('admin/community/create', [AdminController:: class, 'createCommunity'])
+                  ->name('admin/community/create');
 
-    Route::post('admin/reports', [AdminController:: class, 'resolveReport']);
+      Route::post('admin/community/create', [AdminController:: class, 'storeCommunity']);
 
-    Route::post('admin/reports/ban', [AdminController:: class, 'reportBanUser'])->name('admin/reports/ban');
+      Route::post('admin/community/delete', [AdminController:: class, 'destroyCommunity'])
+                  ->name('admin/community/delete');
 
-    Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+      Route::get('admin/community/{community}/edit', [AdminController:: class, 'editCommunity'])
+                  ->name('admin/community/{community}/edit');
+
+      Route::put('admin/community/{community}/edit', [AdminController:: class, 'updateCommunity']);
+
+      Route::get('admin/reports', [AdminController:: class, 'getReports'])->name('admin/reports');
+
+      Route::post('admin/reports', [AdminController:: class, 'resolveReport']);
+
+      Route::post('admin/reports/ban', [AdminController:: class, 'reportBanUser'])->name('admin/reports/ban');
+
+      Route::get('admin/feedbacks', [AdminController:: class, 'indexFeedback'])->name('admin/feedbacks');
+
+      Route::get('admin/organizational-registration', [AdminController:: class, 'organizationalRegistration'])->name('admin/organizational-registration');
+
+      Route::post('admin/organizational-registration', [AdminController:: class, 'handleOrganizationalRegistration']);
+  });
+
+  // School admin routes
+  Route::group(['middleware' => ['App\Http\Middleware\MustBeSchoolAdmin']], function () {
+      Route::get('/school-admin', [AdminController:: class, 'getSchoolAdminPanel'])->name('school-admin-panel');
+
+      Route::post('/deactivate', [AdminController:: class, 'deactivateStudent'])->name('deactivate');
+  });
 });
 
 // Route::get('/chat/{id}', [ChatMessagesController::class, 'communityChat'])->name('communityChat');

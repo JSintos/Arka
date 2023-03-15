@@ -262,7 +262,7 @@ textarea {
     margin: 30px;
     padding: 60px;
     width: 800px;
-    height: 540px;
+    height: 580px;
     background-color: #fff;
     color: #000;
     border-radius: 15px;
@@ -622,3 +622,4 @@ textarea {
     box-shadow: 0 0 10px 0 #e090df inset, 0 0 10px 4px #e090df;
     text-decoration: none;
 }
+

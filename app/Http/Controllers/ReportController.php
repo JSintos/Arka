@@ -90,12 +90,12 @@ class ReportController extends Controller
         // $id = Auth::user()->userId;
 
         // if (Report::where('userId', '=', $id)->where('status', '=', '3')->exists()) {
-        //     return redirect('dashboard')->with("error", "You have already petitioned a community");    
+        //     return redirect('dashboard')->with("error", "You have already petitioned a community");
         // }
         // else{
             return view('request-community');
         // }
-        
+
     }
 
     public function postRequestCommunity(Request $request)
@@ -106,7 +106,7 @@ class ReportController extends Controller
 
         $id = Auth::user()->userId;
 
-        
+
         $community = $request['requestCommunity'];
 
         if(Community::where('communityName', '=', $community)->exists())
@@ -128,11 +128,11 @@ class ReportController extends Controller
                     'status' => 3,
                     'resolutionStatus' => 0
                 ]);
-        
+
                 return redirect('/request-community')->with("success","Community petition requested successfully!");
 
             }
-        
+
         }
     }
 }

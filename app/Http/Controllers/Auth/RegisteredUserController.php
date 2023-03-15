@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Mews\Captcha\Facades\Captcha;
+use Illuminate\Support\Facades\Crypt;
 
 class RegisteredUserController extends Controller
 {
@@ -44,20 +45,20 @@ class RegisteredUserController extends Controller
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()]
             ]);
-    
+
             $user = User::create([
                 'username' => $request->name,
-                'email' => $request->email,
+                'email' => Crypt::encryptString($request->email),
                 'password' => Hash::make($request->password),
             ]);
-    
+
             event(new Registered($user));
-    
+
             Auth::login($user);
-    
+
             return redirect('/community');
         }
-        
+
     }
 
     public function reloadCaptcha()

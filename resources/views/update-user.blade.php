@@ -59,7 +59,7 @@
 
                             <div class="mt-4">
                                 <label for="email" class="form-label"><strong>Email:</strong></label>
-                                <input type="text" class="form-control" id ="email" value="{{Auth::user()->email}}" name="email" required>
+                                <input type="text" class="form-control" id ="email" value="{{ Crypt:: DecryptString(Auth::user()->email)}}" name="email" required>
                             </div>
 
                             <div class="button">

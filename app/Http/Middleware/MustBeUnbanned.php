@@ -4,9 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class MustBeAdmin
+class MustBeUnbanned
 {
     /**
      * Handle an incoming request.
@@ -17,10 +19,15 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()?->userType == 0 || auth()->user()?->userType == 2 || auth()->user()?->userType == 3 || auth()->user()?->userType == 4){
-            abort(Response::HTTP_FORBIDDEN);
-        }
+        if (auth()->user()?->userType == 2){
 
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect(RouteServiceProvider::HOME);
+        }
         return $next($request);
     }
 }

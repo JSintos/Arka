@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Chart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DenySubscription;
+use App\Mail\OrganizationalRegistrationEmail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -37,6 +42,32 @@ class AdminController extends Controller
 
         return back()->with('success','User subscription verfied successfully!');
     }
+  
+    public function denySubscription(Request $request)
+    {
+        $id = $request['subscriptionId'];
+        $subscription = Subscription::find($id);
+        $userId = $subscription->userId;
+
+        $users = User::all();
+
+        foreach($users as $user){
+            if($user->userId == $userId){
+                $deniedUser = $user;
+                break;
+            }
+        }
+        $subscription->delete();
+
+      return view('admin-panel-subscriptions-deny', compact('deniedUser'));
+    }
+
+    public function deniedEmailSubscription(Request $request){
+        $comment = $request->comment;
+        Mail::to($request->email)->send(new DenySubscription($comment));
+
+        return redirect('admin/subscriptions')->with('success', 'Email sent and subscription denied successfully');
+    }
 
     public function indexCommunity()
     {
@@ -48,7 +79,6 @@ class AdminController extends Controller
                         ->groupBy('reportDescription')
                         ->get();
 
-
         return view('admin-panel-communities',compact('communities', 'petitions'));
     }
 
@@ -57,15 +87,14 @@ class AdminController extends Controller
         $request->validate([
             'reportDescription' => 'required', 'unique::communities,communityName'
         ]);
-
         $communityName = $request['reportDescription'];
 
         Community::create([
             'communityName' => $communityName
         ]);
 
-        $update = Report::where('reportDescription', $communityName);
-        $update -> update(['resolutionStatus' => '1']);
+        $createdCommunity = Report::where('reportDescription', $communityName);
+        $createdCommunity->delete();
 
         return redirect('admin/community')->with('success', 'Petitioned Community created successfully!');
     }
@@ -170,6 +199,7 @@ class AdminController extends Controller
 
         return back()->with('success','User banned successfully!');
     }
+
     public function indexFeedback()
     {
 
@@ -187,8 +217,86 @@ class AdminController extends Controller
         foreach($feedbacks as $key => $val){
             $res[++$key] = [$val->month, (double)$val->average];
         }
-        return view('admin-panel-feedbacks')->with('feedbacks', json_encode($res));
 
+        return view('admin-panel-feedbacks')->with('feedbacks', json_encode($res));
+    }
+
+    public function organizationalRegistration()
+    {
+        return view('admin-organizational-registration');
+    }
+
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function handleOrganizationalRegistration(Request $request){
+        // echo $request['educationalInstitution'];
+
+        if (($open = fopen($_FILES['csvFile']['tmp_name'], "r")) !== FALSE){
+
+            while (($data = fgetcsv($open, 1000, ",")) !== FALSE)
+            {
+                $flag = false;
+                $users = DB::table('users')->get();
+
+                do {
+                    $tentativeUsername = strtolower($data[0][0]) . strtolower($data[1]) . random_int(1111, 9999) . "";
+
+                    foreach($users as $user){
+                        if(strcasecmp($user->username, $tentativeUsername) == 0){
+                            $flag = true;
+                        }
+                        else {
+                            $flag = false;
+                        }
+                    }
+                } while($flag);
+
+                $userPassword = AdminController::generateRandomString();
+
+                $user = User::create([
+                    'username' => $tentativeUsername,
+                    'email' => Crypt::encryptString($data[2]),
+                    'password' => Hash::make($userPassword),
+                    'userType' => 0,
+                    'badgeList' => json_encode(array("badgeOne" => 0, "badgeTwo" => 0, "badgeThree" => 0)),
+                    'isVerified' => 1,
+                    'educationalInstitution' => $request['educationalInstitution']
+                ]);
+
+                Mail::to($data[2])->send(new OrganizationalRegistrationEmail($data[2], $tentativeUsername, $userPassword));
+            }
+
+            fclose($open);
+        }
+
+        $schoolAdmin = DB::table('users')->where('username', $request['schoolAdminUsername']);
+        $schoolAdmin->update(["userType" => 3]);
+        $schoolAdmin->update(["educationalInstitution" => $request['educationalInstitution']]);
+
+        return back()->with('success','Registration success!');
+    }
+
+    public function getSchoolAdminPanel(){
+        $user = Auth::user();
+
+        $users = User::where('educationalInstitution', $user->educationalInstitution)->where('userType', '<>', 3)->get();
+
+        return view('school-admin-panel')->with('users', $users);
+    }
+
+    public function deactivateStudent(Request $request){
+        $deactivatedStudent = DB::table('users')->where('userId', $request['deactivateUserId']);
+        $deactivatedStudent->update(["userType" => 4]);
+
+        return back()->with('success','User deactivated!');
     }
 
 }

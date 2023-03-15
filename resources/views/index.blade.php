@@ -57,8 +57,7 @@
 <section class="about"id="about">
     <div class="about-img">
         <img src="images/About.png">
-    </div
-    >
+    </div>
     <div class="about-text">
         <h2>Find your study partner</h2>
         <p>ARKA  is the shortened version of “Aral Kaibigan”. It is a web-based
@@ -67,6 +66,23 @@
         who wish to collaborate and find peers with the same interests. </p>
     </div>
 </section>
+<div class="container my-5">
+    <div class="d-flex m-auto" style="justify-content:center; align-items:center;">
+    <h3>Our user's rate us</h3></div>
+    <div class="d-flex m-auto" style="justify-content:center; align-items:center;">
+    <i class="fa fa-star fa-6x"></i></div>
+    <div class="d-flex m-auto" style="justify-content:center; align-items:center;">
+    <?php
+      $ratingSum = DB::table('feedbacks')->where('type', 1)->sum('firstQuestionRating');
+      $ratingCount =  DB::table('feedbacks')->where('type', 1)->count();
+      if($ratingCount < 1){
+        $avgRating = "No reviews yet.";
+      }else
+        $avgRating = round($ratingSum/$ratingCount,2);
+      ?>
+    <span style="font-size:30px;"> {{$avgRating}} stars</span>
+    </div>
+</div>
 
 <!-- Offers section -->
 <section class="offers" id="offers">
